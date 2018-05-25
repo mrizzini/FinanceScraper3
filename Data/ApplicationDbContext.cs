@@ -16,7 +16,7 @@ namespace FinanceScraper3.Data
         }
 
         public DbSet<Portfolio> Portfolio { get; set; }    
-        public DbSet<Stock> Stocks { get; set; }   
+        public DbSet<Stock> Stock { get; set; }   
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

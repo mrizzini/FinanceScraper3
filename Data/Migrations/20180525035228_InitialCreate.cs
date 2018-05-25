@@ -2,7 +2,7 @@
 
 namespace FinanceScraper3.Data.Migrations
 {
-    public partial class InitialCreate2 : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
