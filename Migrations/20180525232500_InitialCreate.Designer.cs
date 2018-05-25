@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace FinanceScraper3.Data.Migrations
+namespace FinanceScraper3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180525035228_InitialCreate")]
+    [Migration("20180525232500_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
