@@ -1,0 +1,13 @@
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0/app.db
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0/FinanceScraper3.deps.json
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0/FinanceScraper3.runtimeconfig.json
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0/FinanceScraper3.runtimeconfig.dev.json
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0/FinanceScraper3.dll
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0/FinanceScraper3.pdb
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/obj/Debug/netcoreapp2.0/FinanceScraper3.csprojAssemblyReference.cache
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/obj/Debug/netcoreapp2.0/FinanceScraper3.csproj.CoreCompileInputs.cache
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/obj/Debug/netcoreapp2.0/FinanceScraper3.AssemblyInfoInputs.cache
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/obj/Debug/netcoreapp2.0/FinanceScraper3.AssemblyInfo.cs
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/obj/Debug/netcoreapp2.0/FinanceScraper3.dll
+/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/obj/Debug/netcoreapp2.0/FinanceScraper3.pdb
