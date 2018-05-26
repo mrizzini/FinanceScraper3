@@ -33,6 +33,12 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-area="" asp-controller="Snapshots" asp-action="Index">Snapshots</a>
+                        }
+                       </li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
