@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using FinanceScraper3.Models;
 using FinanceScraper3.Data;
+using FinanceScraper3.Controllers;
 using Microsoft.AspNetCore.Authorization;
 
 namespace FinanceScraper3.Controllers
@@ -21,9 +22,10 @@ namespace FinanceScraper3.Controllers
             return View();
         }
 
-        public IActionResult NewSnapshot(Portfolio port)
+        public IActionResult NewSnapshot()
         {
 
+            Scrape.ScrapeData();
 
             return Content("oh boyyy");
 
