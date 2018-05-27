@@ -23,8 +23,15 @@ namespace FinanceScraper3
  
         public static void ScrapeData()
         {
-                       // create new driver class
-             IWebDriver driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper/bin/Debug/netcoreapp2.0/");
+            // create new driver class
+            // IWebDriver driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0/");
+            //  IWebDriver driver = new ChromeDriver(".");
+            IWebDriver driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0");
+            
+            
+    
+    // /Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper/bin/Debug/netcoreapp2.0/
+            
 
             driver.Navigate().GoToUrl("https://login.yahoo.com/config/login?.intl=us&.lang=en-US&.src=finance&.done=https%3A%2F%2Ffinance.yahoo.com%2F");
 

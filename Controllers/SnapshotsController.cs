@@ -27,7 +27,7 @@ namespace FinanceScraper3.Controllers
 
             Scrape.ScrapeData();
 
-            return Content("oh boyyy");
+            return Content("test");
 
 
         }
