@@ -95,11 +95,11 @@ namespace FinanceScraper3
             
             var totalGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[3]/span")).Text.Split(" ");
 
-            System.Console.WriteLine("totalValue is {0} and type is {1}", totalValue, totalValue.GetType());
-            System.Console.WriteLine("dayGain [0] is {0} and type is {1}", dayGain[0], dayGain[0].GetType());
-            System.Console.WriteLine("dayGain [1] is {0} and type is {1}", dayGain[1], dayGain[1].GetType());
-            System.Console.WriteLine("totalGain [0] is {0} and type is {1}", totalGain[0], totalGain[0].GetType());
-            System.Console.WriteLine("totalGain [1] is {0} and type is {1}", totalGain[1], totalGain[1].GetType());
+            // System.Console.WriteLine("totalValue is {0} and type is {1}", totalValue, totalValue.GetType());
+            // System.Console.WriteLine("dayGain [0] is {0} and type is {1}", dayGain[0], dayGain[0].GetType());
+            // System.Console.WriteLine("dayGain [1] is {0} and type is {1}", dayGain[1], dayGain[1].GetType());
+            // System.Console.WriteLine("totalGain [0] is {0} and type is {1}", totalGain[0], totalGain[0].GetType());
+            // System.Console.WriteLine("totalGain [1] is {0} and type is {1}", totalGain[1], totalGain[1].GetType());
             
             snapshot.Date = DateTime.Now;
             
@@ -107,15 +107,20 @@ namespace FinanceScraper3
             
             snapshot.DayGain = Double.Parse(dayGain[0]);
             
-            // snapshot.DayGainPercent = Double.Parse(dayGain[1].TrimEnd( new char[] { '%', ' ' } ) ) / 100;
-            snapshot.DayGainPercent = Double.Parse(dayGain[1].Replace("%", "").Replace("(", "").Replace(")", "").Replace("+", "")) / 100;
+            snapshot.DayGainPercent = Double.Parse(dayGain[1].TrimStart(new char[] {'(', '+', '-', ' ' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;
+            // snapshot.DayGainPercent = Double.Parse(dayGain[1].Replace("%", "").Replace("(", "").Replace(")", "").Replace("+", "")) / 100;
+            
                         
             snapshot.TotalGain = Double.Parse(totalGain[0]);
             
-            // snapshot.TotalGainPercent = Double.Parse(totalGain[1].TrimEnd( new char[] { '%', ' ' } ) ) / 100;
-            snapshot.TotalGainPercent = Double.Parse(totalGain[1].Replace("(", "").Replace(")", "").Replace("%", "")) / 100;
+            snapshot.TotalGainPercent = Double.Parse(totalGain[1].TrimStart(new char[] {'(', ' ', '+', '-' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;
+            // snapshot.TotalGainPercent = Double.Parse(totalGain[1].Replace("(", "").Replace(")", "").Replace("%", "")) / 100;
             
-
+            System.Console.WriteLine("totalValue is {0} and type is {1}", snapshot.TotalValue, snapshot.TotalValue.GetType());
+            System.Console.WriteLine("dayGain is {0} and type is {1}", snapshot.DayGain, snapshot.DayGain.GetType());
+            System.Console.WriteLine("dayGain percent is {0} and type is {1}", snapshot.DayGainPercent, snapshot.DayGainPercent.GetType());
+            System.Console.WriteLine("totalGain is {0} and type is {1}", snapshot.TotalGain, snapshot.TotalGain.GetType());
+            System.Console.WriteLine("totalGain percent is {0} and type is {1}", snapshot.TotalGainPercent, snapshot.TotalGainPercent.GetType());
 
             return snapshot;
 
