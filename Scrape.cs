@@ -14,24 +14,22 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using FinanceScraper3.Controllers;
 using FinanceScraper3.Models;
-
+using System.Globalization;
 
 namespace FinanceScraper3
 {
     public class Scrape
     {
- 
-        public static void ScrapeData()
+        public static Portfolio ScrapeData()
         {
+            var snapshot = new Portfolio();
+
+            // enables invisible scrape
+            ChromeOptions option = new ChromeOptions();
+            option.AddArgument("--headless");
+
             // create new driver class
-            // IWebDriver driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0/");
-            //  IWebDriver driver = new ChromeDriver(".");
-            IWebDriver driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0");
-            
-            
-    
-    // /Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper/bin/Debug/netcoreapp2.0/
-            
+            var driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0", option);            
 
             driver.Navigate().GoToUrl("https://login.yahoo.com/config/login?.intl=us&.lang=en-US&.src=finance&.done=https%3A%2F%2Ffinance.yahoo.com%2F");
 
@@ -90,6 +88,46 @@ namespace FinanceScraper3
             {
                 System.Console.WriteLine("Stock is " + stock.FindElement(By.ClassName("_1_2Qy")).Text);
             }
+
+            var totalValue = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[1]")).Text;
+            
+            var dayGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[2]/span")).Text.Split(" ");
+            
+            var totalGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[3]/span")).Text.Split(" ");
+
+            System.Console.WriteLine("totalValue is {0} and type is {1}", totalValue, totalValue.GetType());
+            System.Console.WriteLine("dayGain [0] is {0} and type is {1}", dayGain[0], dayGain[0].GetType());
+            System.Console.WriteLine("dayGain [1] is {0} and type is {1}", dayGain[1], dayGain[1].GetType());
+            System.Console.WriteLine("totalGain [0] is {0} and type is {1}", totalGain[0], totalGain[0].GetType());
+            System.Console.WriteLine("totalGain [1] is {0} and type is {1}", totalGain[1], totalGain[1].GetType());
+            
+            snapshot.Date = DateTime.Now;
+            
+            snapshot.TotalValue = Double.Parse(totalValue, NumberStyles.Currency);
+            
+            snapshot.DayGain = Double.Parse(dayGain[0]);
+            
+            // snapshot.DayGainPercent = Double.Parse(dayGain[1].TrimEnd( new char[] { '%', ' ' } ) ) / 100;
+            snapshot.DayGainPercent = Double.Parse(dayGain[1].Replace("%", "").Replace("(", "").Replace(")", "").Replace("+", "")) / 100;
+                        
+            snapshot.TotalGain = Double.Parse(totalGain[0]);
+            
+            // snapshot.TotalGainPercent = Double.Parse(totalGain[1].TrimEnd( new char[] { '%', ' ' } ) ) / 100;
+            snapshot.TotalGainPercent = Double.Parse(totalGain[1].Replace("(", "").Replace(")", "").Replace("%", "")) / 100;
+            
+
+
+            return snapshot;
+
+
+        // public DateTime Date { get; set; }
+        // public double TotalValue { get; set; }
+        // public double DayGain { get; set; }
+        // public double DayGainPercent { get; set; }
+        // public double TotalGain { get; set; }
+        // public double TotalGainPercent { get; set; }
+        // public virtual List<Stock> Stocks { get; set; }
+
         }
  
  

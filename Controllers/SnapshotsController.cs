@@ -12,11 +12,19 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FinanceScraper3.Controllers
 {
+    // /snapshots
+    [Authorize]
     public class SnapshotsController : Controller
     {
         
-        // /snapshots
-        [Authorize]
+        private ApplicationDbContext ctx; // = new ApplicationDbContext();
+
+        public SnapshotsController(ApplicationDbContext ctx)
+        {
+            this.ctx = ctx;
+        }
+
+
         public IActionResult Index()
         {
             return View();
@@ -25,10 +33,12 @@ namespace FinanceScraper3.Controllers
         public IActionResult NewSnapshot()
         {
 
-            Scrape.ScrapeData();
+            var snapshot = Scrape.ScrapeData();
+
+            ctx.Portfolio.Add(snapshot);
+            ctx.SaveChanges();
 
             return Content("test");
-
 
         }
         
