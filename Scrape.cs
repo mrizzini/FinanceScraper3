@@ -49,12 +49,14 @@ namespace FinanceScraper3
             userPasswordField.SendKeys("scrapePass");
             loginPasswordButton.Click();
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15); 
+            // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15); 
 
 
-            var portfolioButton = driver.FindElement(By.XPath("//*[@id='Nav-0-DesktopNav']/div/div[3]/div/div[1]/ul/li[2]"));
+            // var portfolioButton = driver.FindElement(By.XPath("//*[@id='Nav-0-DesktopNav']/div/div[3]/div/div[1]/ul/li[2]"));
 
-            portfolioButton.Click();
+            // portfolioButton.Click();
+
+             driver.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_0/view/v2");
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);  
 
@@ -72,66 +74,91 @@ namespace FinanceScraper3
                 System.Console.WriteLine("Popup not found");
             }
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);  
+            // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);  
             
-            var myScraperButton = driver.FindElement(By.XPath("//*[@id='main']/section/section/div[2]/table/tbody/tr[2]/td[1]/a"));
+            // var myScraperButton = driver.FindElement(By.XPath("//*[@id='main']/section/section/div[2]/table/tbody/tr[2]/td[1]/a"));
 
-            myScraperButton.Click();
-
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);  
+            // myScraperButton.Click();
             
-            var stockList = driver.FindElements(By.XPath("//*[@id='main']/section/section[2]/div[2]/table/tbody/tr"));
 
-            System.Console.WriteLine("stocklist count is {0}", stockList.Count);
 
-            foreach (var stock in stockList)
-            {
-                System.Console.WriteLine("Stock is " + stock.FindElement(By.ClassName("_1_2Qy")).Text);
-            }
+
 
             var totalValue = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[1]")).Text;
             
             var dayGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[2]/span")).Text.Split(" ");
-            
+
+
             var totalGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[3]/span")).Text.Split(" ");
 
-            // System.Console.WriteLine("totalValue is {0} and type is {1}", totalValue, totalValue.GetType());
-            // System.Console.WriteLine("dayGain [0] is {0} and type is {1}", dayGain[0], dayGain[0].GetType());
-            // System.Console.WriteLine("dayGain [1] is {0} and type is {1}", dayGain[1], dayGain[1].GetType());
-            // System.Console.WriteLine("totalGain [0] is {0} and type is {1}", totalGain[0], totalGain[0].GetType());
-            // System.Console.WriteLine("totalGain [1] is {0} and type is {1}", totalGain[1], totalGain[1].GetType());
             
             snapshot.Date = DateTime.Now;
             
             snapshot.TotalValue = Double.Parse(totalValue, NumberStyles.Currency);
+
+            snapshot.TotalGain = Double.Parse(totalGain[0]);     
             
+            snapshot.TotalGainPercent = Double.Parse(totalGain[1].TrimStart(new char[] {'(', ' ' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;
+        
             snapshot.DayGain = Double.Parse(dayGain[0]);
             
-            snapshot.DayGainPercent = Double.Parse(dayGain[1].TrimStart(new char[] {'(', '+', '-', ' ' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;
-            // snapshot.DayGainPercent = Double.Parse(dayGain[1].Replace("%", "").Replace("(", "").Replace(")", "").Replace("+", "")) / 100;
+            snapshot.DayGainPercent = Double.Parse(dayGain[1].TrimStart(new char[] {'(', ' ' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;            
+
+
+            var portfolioStockList = new List<Stock>();
+   
+            var stockListTable = driver.FindElement(By.XPath("//*[@id='main']/section/section[2]/div[2]/table"));
+
+            var stockListTableRows = stockListTable.FindElements(By.TagName("tr"));
+
+            var stockInfo = new List<string>();
+            var counter = 0;
+
+            foreach (var row in stockListTableRows)
+            {
+                var stockListTableCells = row.FindElements(By.TagName("td"));
+                if (stockListTableCells.Count > 0)
+                {
+
+                foreach (var cell in stockListTableCells)
+                {
+                    stockInfo.Add(cell.Text);
+                    System.Console.WriteLine("{0} is {1} and {2}", counter, cell.Text, cell.Text.GetType());
+                    counter++;
+                }
+
+                var stockSymbolAndPrice = stockInfo[0].ToString().Split("\n");
+                var changeByDollarAndPercent = stockInfo[1].ToString().Split("\n");
+                var dayGainByDollarAndPercent = stockInfo[5].ToString().Split("\n");
+                var totalGainByDollarAndPercent = stockInfo[6].ToString().Split("\n");
+                var lotSplit = stockInfo[7].Split(" ");
+        
+
+            portfolioStockList.Add(new Stock()
+            {
+                StockSymbol = stockSymbolAndPrice[0].ToString(),          
+                CurrentPrice = Double.Parse(stockSymbolAndPrice[1]),
+                ChangeByDollar = Double.Parse(changeByDollarAndPercent[1]),
+                ChangeByPercent = (Double.Parse(changeByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
+                Shares = Double.Parse(stockInfo[2]),  
+                CostBasis = Double.Parse(stockInfo[3]),
+                MarketValue = Double.Parse(stockInfo[4]),
+                DayGainByDollar = Double.Parse(dayGainByDollarAndPercent[1]),
+                DayGainByPercent = (Double.Parse(dayGainByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
+                TotalGainByDollar = Double.Parse(totalGainByDollarAndPercent[1]),
+                TotalGainByPercent = (Double.Parse(totalGainByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
+                Lots = Double.Parse(lotSplit[0]),
+                Notes = stockInfo[8]
+            });
             
-                        
-            snapshot.TotalGain = Double.Parse(totalGain[0]);
-            
-            snapshot.TotalGainPercent = Double.Parse(totalGain[1].TrimStart(new char[] {'(', ' ', '+', '-' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;
-            // snapshot.TotalGainPercent = Double.Parse(totalGain[1].Replace("(", "").Replace(")", "").Replace("%", "")) / 100;
-            
-            System.Console.WriteLine("totalValue is {0} and type is {1}", snapshot.TotalValue, snapshot.TotalValue.GetType());
-            System.Console.WriteLine("dayGain is {0} and type is {1}", snapshot.DayGain, snapshot.DayGain.GetType());
-            System.Console.WriteLine("dayGain percent is {0} and type is {1}", snapshot.DayGainPercent, snapshot.DayGainPercent.GetType());
-            System.Console.WriteLine("totalGain is {0} and type is {1}", snapshot.TotalGain, snapshot.TotalGain.GetType());
-            System.Console.WriteLine("totalGain percent is {0} and type is {1}", snapshot.TotalGainPercent, snapshot.TotalGainPercent.GetType());
+            }
+                stockInfo.Clear();
+            }
+
+            snapshot.Stocks = portfolioStockList;
 
             return snapshot;
 
-
-        // public DateTime Date { get; set; }
-        // public double TotalValue { get; set; }
-        // public double DayGain { get; set; }
-        // public double DayGainPercent { get; set; }
-        // public double TotalGain { get; set; }
-        // public double TotalGainPercent { get; set; }
-        // public virtual List<Stock> Stocks { get; set; }
 
         }
  
