@@ -28,7 +28,7 @@ namespace FinanceScraper3.Services
             _context = context;
         }
 
-        public async Task<Portfolio[]> GetPortfolioSnapshotsAsync()
+        public async Task<Portfolio[]> GetPortfolioSnapshotsAsync(ApplicationUser user)
         {
             return await _context.Portfolios.ToArrayAsync();
         }

@@ -21,6 +21,8 @@ namespace FinanceScraper3.Models
         public double TotalGain { get; set; }
 
         public double TotalGainPercent { get; set; }
+
+        public string UserId { get; set; }
         
         public virtual List<Stock> Stocks { get; set; }
     }
