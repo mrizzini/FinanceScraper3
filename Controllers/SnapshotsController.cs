@@ -75,7 +75,11 @@ namespace FinanceScraper3.Controllers
                 return RedirectToAction("Index");
             }
 
-            var successful = await _portfolioService.TriggerSnapshotAsync(newPortfolio);
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null) return Challenge();
+
+            var successful = await _portfolioService.TriggerSnapshotAsync(newPortfolio, currentUser);
+            
             if (!successful)
             {
                 return BadRequest(new { error = "Could not scrape data at this time" });

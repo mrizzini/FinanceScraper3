@@ -10,7 +10,7 @@ namespace FinanceScraper3.Services
     {
         Task<Portfolio[]> GetPortfolioSnapshotsAsync(ApplicationUser user);
 
-        Task<bool> TriggerSnapshotAsync(Portfolio newSnapshot);
+        Task<bool> TriggerSnapshotAsync(Portfolio newSnapshot, ApplicationUser user);
     }
 }
 

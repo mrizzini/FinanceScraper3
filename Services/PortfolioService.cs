@@ -30,16 +30,20 @@ namespace FinanceScraper3.Services
 
         public async Task<Portfolio[]> GetPortfolioSnapshotsAsync(ApplicationUser user)
         {
-            return await _context.Portfolios.ToArrayAsync();
+            return await _context.Portfolios
+            .Where(x=> x.UserId == user.Id)
+            .ToArrayAsync();
         }
 
-        public async Task<bool> TriggerSnapshotAsync(Portfolio newSnapshot)
+        public async Task<bool> TriggerSnapshotAsync(Portfolio newSnapshot, ApplicationUser user)
         {
             
             // var snapshot = new Portfolio();            
 
             ChromeOptions option = new ChromeOptions();
             option.AddArgument("--headless");
+
+            
 
             // create new driver class
             var driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0", option);            
@@ -50,7 +54,7 @@ namespace FinanceScraper3.Services
             // navigating to username input box and clicking to sign in
             var userNameField = driver.FindElement(By.XPath("//*[@id='login-username']"));
             var loginUserButton = driver.FindElement(By.XPath("//*[@id='login-signin']"));            
-            userNameField.SendKeys("testscraper");
+            userNameField.SendKeys(user.UserName);
             loginUserButton.Click();
 
             // waiting 5 seconds for page to load then to go onto enter password. need to throw an exception here
@@ -59,7 +63,8 @@ namespace FinanceScraper3.Services
             // sending password to input box and signing in 
             var userPasswordField = driver.FindElement(By.XPath("//*[@id='login-passwd']"));
             var loginPasswordButton = driver.FindElement(By.XPath("//*[@id='login-signin']")); 
-            userPasswordField.SendKeys("scrapePass");
+            userPasswordField.SendKeys("Password1!");
+            // userPasswordField.SendKeys(user.UserName);
             loginPasswordButton.Click();
 
             // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15); 
@@ -169,6 +174,8 @@ namespace FinanceScraper3.Services
             }
 
             newSnapshot.Stocks = portfolioStockList;
+
+            newSnapshot.UserId = user.Id;
 
             // ctx.Portfolios.Add(snapshot);
             _context.Portfolios.Add(newSnapshot);
