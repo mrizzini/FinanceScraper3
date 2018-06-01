@@ -23,7 +23,8 @@ namespace FinanceScraper3
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the container, or the collection of servies that ASP.NET Core knows about
+        // Any services we use in the app must be added in here
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -35,6 +36,10 @@ namespace FinanceScraper3
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+
+            // tells ASP.NET Core to use the PortfolioService whenever the IPortfolioService interface is requested in a constructor or anywhere else
+            // B/C services are "injected" from the service container, this pattern is called dependency injection
+            services.AddScoped<IPortfolioService, PortfolioService>();
 
             services.AddMvc();
         }

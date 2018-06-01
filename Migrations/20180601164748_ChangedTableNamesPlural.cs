@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinanceScraper3.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class ChangedTableNamesPlural : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,7 +47,7 @@ namespace FinanceScraper3.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Portfolio",
+                name: "Portfolios",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -61,7 +61,7 @@ namespace FinanceScraper3.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Portfolio", x => x.Id);
+                    table.PrimaryKey("PK_Portfolios", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -171,7 +171,7 @@ namespace FinanceScraper3.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stock",
+                name: "Stocks",
                 columns: table => new
                 {
                     StockSymbol = table.Column<string>(nullable: true),
@@ -193,11 +193,11 @@ namespace FinanceScraper3.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stock", x => x.Id);
+                    table.PrimaryKey("PK_Stocks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Stock_Portfolio_PortfolioId",
+                        name: "FK_Stocks_Portfolios_PortfolioId",
                         column: x => x.PortfolioId,
-                        principalTable: "Portfolio",
+                        principalTable: "Portfolios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -240,8 +240,8 @@ namespace FinanceScraper3.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stock_PortfolioId",
-                table: "Stock",
+                name: "IX_Stocks_PortfolioId",
+                table: "Stocks",
                 column: "PortfolioId");
         }
 
@@ -263,7 +263,7 @@ namespace FinanceScraper3.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Stock");
+                name: "Stocks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -272,7 +272,7 @@ namespace FinanceScraper3.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Portfolio");
+                name: "Portfolios");
         }
     }
 }

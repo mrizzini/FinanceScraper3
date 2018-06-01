@@ -15,8 +15,10 @@ namespace FinanceScraper3.Data
         {
         }
 
-        public DbSet<Portfolio> Portfolio { get; set; }    
-        public DbSet<Stock> Stock { get; set; }   
+        public DbSet<Portfolio> Portfolios { get; set; }    
+        public DbSet<Stock> Stocks { get; set; }   
+        // These represent tables/collections in the DB.
+        // Telling entity we want to store Portolio entities in a table called Portfolio
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

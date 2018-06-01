@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceScraper3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180525232500_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180601164748_ChangedTableNamesPlural")]
+    partial class ChangedTableNamesPlural
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -87,7 +87,7 @@ namespace FinanceScraper3.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Portfolio");
+                    b.ToTable("Portfolios");
                 });
 
             modelBuilder.Entity("FinanceScraper3.Models.Stock", b =>
@@ -127,7 +127,7 @@ namespace FinanceScraper3.Migrations
 
                     b.HasIndex("PortfolioId");
 
-                    b.ToTable("Stock");
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

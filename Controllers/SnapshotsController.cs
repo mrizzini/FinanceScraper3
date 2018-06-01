@@ -9,6 +9,7 @@ using FinanceScraper3.Models;
 using FinanceScraper3.Data;
 using FinanceScraper3.Controllers;
 using Microsoft.AspNetCore.Authorization;
+using FinanceScraper3.Services;
 
 namespace FinanceScraper3.Controllers
 {
@@ -16,18 +17,38 @@ namespace FinanceScraper3.Controllers
     [Authorize]
     public class SnapshotsController : Controller
     {
-        
-        private ApplicationDbContext ctx; // = new ApplicationDbContext();
 
-        public SnapshotsController(ApplicationDbContext ctx)
+        // Declares private var to hold a reference to the IPortfolio service
+        // Lets us use the service rom the Index method later
+        private readonly IPortfolioService _portfolioService;
+        
+        private ApplicationDbContext _ctx; // = new ApplicationDbContext();
+
+        // Constructor. By adding IPortfolioSerivce we need to provide an object that matches the interface when we create this controller
+        // Interfaces help decouple the logic of the app
+        public SnapshotsController(ApplicationDbContext ctx, IPortfolioService portfolioService)
         {
-            this.ctx = ctx;
+            _portfolioService = portfolioService;
+            _ctx = ctx;
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            // returns a Task<Portfolio[]>. We may not have the result right away so we use the await keyword so the code waits until the result is ready before continuing
+            // await lets the code pause on an async operation and the pick up where it left off when the database request finishes, and the rest of our app isnt blocked
+            // Now we must update the Index method signature to return Task<IActionResult> and mark as async
+            // Now our Snapshots Controller depends on the IPortfolio Service interface
+            // Now we must declare which concrete class to use for each interface, in Startup.cs
+            var portfolioSnapshots = await _portfolioService.GetPortfolioSnapshotsAsync();
+
+            var model = new PortfolioViewModel()
+            {
+                PortfolioSnapshots = portfolioSnapshots
+            };
+
+
+            return View(model);
         }
 
         public IActionResult NewSnapshot()
@@ -35,8 +56,8 @@ namespace FinanceScraper3.Controllers
 
             var snapshot = Scrape.ScrapeData();
 
-            ctx.Portfolio.Add(snapshot);
-            ctx.SaveChanges();
+            _ctx.Portfolios.Add(snapshot);
+            _ctx.SaveChanges();
 
             return Content("test");
 

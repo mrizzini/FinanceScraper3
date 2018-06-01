@@ -1,18 +1,65 @@
+@model FinanceScraper3.Models.PortfolioViewModel
+
+@{
+    ViewData["Title"] = "Snapshots";
+}
+
+
+<div class="panel panel-default todo-panel">
+    <div class="panel-heading">@ViewData["Title"]</div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>&#x2714;</td>
+                <td>Item</td>
+                <td>Due</td>
+            </tr>
+        </thead>
+
+        @if(Model == null){
+            <span>no items found</span>
+        }
+        else {
+        @foreach (var snap in Model.PortfolioSnapshots)
+        {   
+            <tr>
+                <td>
+                    <input type="checkbox" class="done-checkbox">
+                </td>
+                <td>@snap.TotalValue</td>
+                <td>@snap.DayGain</td>
+            </tr>
+            }
+        }
+
+            
+    </table>
+
+<div class="panel-footer add-item-form">
+<!-- TODO: Add item form -->
+</div>
+
+
+@*
 @model FinanceScraper3.Models.Portfolio
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+*@
 
 <h2>Your Snapshots:</h2>
 
 <p>If you'd like to trigger a new snap shot of your portfolio, please click the button below</p>
-@*
-<button id="new-snap" class="btn btn-info">Trigger New Snapshot</button>
-*@
+
+<!-- <button id="new-snap" class="btn btn-info">Trigger New Snapshot</button> -->
 
 
-        <button type="button" value= "NewSnapshot" onclick="location.href='@Url.Action("NewSnapshot", "Snapshots")'">Trig New Snap</button>
+        <button type="button" value= "NewSnapshot" onclick="location.href='@Url.Action("NewSnapshot", "Snapshots")'">Trigger New Snapshot</button>
+
+
+
 
 @*
 @section scripts

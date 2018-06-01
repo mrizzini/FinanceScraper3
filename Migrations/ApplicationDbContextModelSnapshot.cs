@@ -85,7 +85,7 @@ namespace FinanceScraper3.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Portfolio");
+                    b.ToTable("Portfolios");
                 });
 
             modelBuilder.Entity("FinanceScraper3.Models.Stock", b =>
@@ -125,7 +125,7 @@ namespace FinanceScraper3.Migrations
 
                     b.HasIndex("PortfolioId");
 
-                    b.ToTable("Stock");
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
