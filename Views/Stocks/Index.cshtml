@@ -1,0 +1,57 @@
+@model FinanceScraper3.Models.StockViewModel
+
+@{
+    ViewData["Title"] = "Your stocks";
+}
+
+
+<div class="panel panel-default todo-panel">
+    <div class="panel-heading">@ViewData["Title"]</div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>Stock</td>
+                <td>Price</td>
+                <td>Change By Dollar</td>
+                <td>Change By Percent</td>
+                <td>Shares</td>
+                <td>Cost Basis</td>
+                <td>Market Value</td>
+                <td>Day Gain By Dollar</td>
+                <td>Day Gain By Percent</td>
+                <td>Total Gain By Dollar</td>
+                <td>Total Gain By Percent</td>
+                <td>Lots</td>
+                <td>Notes</td>
+
+            </tr>
+        </thead>
+
+        @if(Model == null){
+            <span>no items found</span>
+        }
+        else {
+        @foreach (var snap in Model.Stocks)
+        {   
+            <tr>
+                <td>@snap.StockSymbol</td>
+                <td>@snap.CurrentPrice</td>
+                <td>@snap.ChangeByDollar</td>
+                <td>@snap.ChangeByPercent</td>
+                <td>@snap.Shares</td>
+                <td>@snap.CostBasis</td>
+                <td>@snap.MarketValue</td>
+                <td>@snap.DayGainByDollar</td>
+                <td>@snap.DayGainByPercent</td>
+                <td>@snap.TotalGainByDollar</td>
+                <td>@snap.TotalGainByPercent</td>
+                <td>@snap.Lots</td>
+                <td>@snap.Notes</td>
+            </tr>
+            }
+        }
+    </table>
+
+<div class="panel-footer add-item-form">
+<!-- TODO: Add item form -->
+</div>

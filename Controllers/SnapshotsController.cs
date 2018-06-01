@@ -33,6 +33,7 @@ namespace FinanceScraper3.Controllers
         }
 
 
+        // Index = /Snapshots
         public async Task<IActionResult> Index()
         {
             // returns a Task<Portfolio[]>. We may not have the result right away so we use the await keyword so the code waits until the result is ready before continuing
@@ -51,6 +52,26 @@ namespace FinanceScraper3.Controllers
             return View(model);
         }
 
+
+
+        public async Task<IActionResult> TriggerSnapshot(Portfolio newPortfolio)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var successful = await _portfolioService.TriggerSnapshotAsync(newPortfolio);
+            if (!successful)
+            {
+                return BadRequest(new { error = "Could not scrape data at this time" });
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
+        // NewSnapshot
         public IActionResult NewSnapshot()
         {
 

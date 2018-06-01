@@ -4,16 +4,24 @@
     ViewData["Title"] = "Snapshots";
 }
 
+<h2>Your Snapshots:</h2>
+
 
 <div class="panel panel-default todo-panel">
     <div class="panel-heading">@ViewData["Title"]</div>
 
+
+
     <table class="table table-hover">
         <thead>
             <tr>
-                <td>&#x2714;</td>
-                <td>Item</td>
-                <td>Due</td>
+                <td>Date Snapped</td>
+                <td>Total Value</td>
+                <td>Day Gain</td>
+                <td>Day Gain Percentage</td>
+                <td>Total Gain</td>
+                <td>Total Gain Percentage</td>
+
             </tr>
         </thead>
 
@@ -21,24 +29,29 @@
             <span>no items found</span>
         }
         else {
-        @foreach (var snap in Model.PortfolioSnapshots)
+        @foreach (var stock in Model.PortfolioSnapshots)
         {   
             <tr>
-                <td>
-                    <input type="checkbox" class="done-checkbox">
-                </td>
-                <td>@snap.TotalValue</td>
-                <td>@snap.DayGain</td>
+                <td>@stock.Date</td>
+                <td>@stock.TotalValue</td>
+                <td>@stock.DayGain</td>
+                <td>@stock.DayGainPercent</td>
+                <td>@stock.TotalGain</td>
+                <td>@stock.TotalGainPercent</td>
             </tr>
             }
         }
-
-            
     </table>
 
-<div class="panel-footer add-item-form">
-<!-- TODO: Add item form -->
+
+
+
+
+<div class= "panel-footer new-snapshot-form">
+    @await Html.PartialAsync("TriggerSnapshotPartial", new Portfolio())
 </div>
+
+
 
 
 @*
@@ -49,7 +62,6 @@
 }
 *@
 
-<h2>Your Snapshots:</h2>
 
 <p>If you'd like to trigger a new snap shot of your portfolio, please click the button below</p>
 

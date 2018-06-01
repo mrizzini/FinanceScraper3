@@ -41,6 +41,9 @@ namespace FinanceScraper3
             // B/C services are "injected" from the service container, this pattern is called dependency injection
             services.AddScoped<IPortfolioService, PortfolioService>();
 
+            services.AddScoped<IStockService, StockService>();
+
+
             services.AddMvc();
         }
 
