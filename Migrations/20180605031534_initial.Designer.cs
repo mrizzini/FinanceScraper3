@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceScraper3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180601164748_ChangedTableNamesPlural")]
-    partial class ChangedTableNamesPlural
+    [Migration("20180605031534_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,6 +84,8 @@ namespace FinanceScraper3.Migrations
                     b.Property<double>("TotalGainPercent");
 
                     b.Property<double>("TotalValue");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 

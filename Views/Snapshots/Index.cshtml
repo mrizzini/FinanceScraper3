@@ -21,8 +21,6 @@
                 <td>Day Gain %</td>
                 <td>Total Gain</td>
                 <td>Total Gain %</td>
-                <td>See more</td>
-
             </tr>
         </thead>
 
@@ -33,13 +31,13 @@
         @foreach (var snapshot in Model.PortfolioSnapshots)
         {   
             <tr>
-                <td>@snapshot.Date</td>
+                <td><a asp-controller="Stocks" asp-route-id="@snapshot.Id">@snapshot.Date</a></td>
                 <td>@snapshot.TotalValue</td>
                 <td>@snapshot.DayGain</td>
                 <td>@snapshot.DayGainPercent</td>
                 <td>@snapshot.TotalGain</td>
                 <td>@snapshot.TotalGainPercent</td>
-                <td><a asp-controller="Stocks" asp-route-id="@snapshot.Id">Click for more info</a></td>
+
             </tr>
             }
         }

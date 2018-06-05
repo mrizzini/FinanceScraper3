@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinanceScraper3.Migrations
 {
-    public partial class ChangedTableNamesPlural : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,7 +57,8 @@ namespace FinanceScraper3.Migrations
                     DayGain = table.Column<double>(nullable: false),
                     DayGainPercent = table.Column<double>(nullable: false),
                     TotalGain = table.Column<double>(nullable: false),
-                    TotalGainPercent = table.Column<double>(nullable: false)
+                    TotalGainPercent = table.Column<double>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

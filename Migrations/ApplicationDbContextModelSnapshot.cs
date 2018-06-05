@@ -113,8 +113,6 @@ namespace FinanceScraper3.Migrations
 
                     b.Property<string>("Notes");
 
-                    b.Property<string>("PortId");
-
                     b.Property<int?>("PortfolioId");
 
                     b.Property<double>("Shares");

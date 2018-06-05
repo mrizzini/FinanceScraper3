@@ -51,7 +51,8 @@ namespace FinanceScraper3.Services
             // navigating to username input box and clicking to sign in
             var userNameField = driver.FindElement(By.XPath("//*[@id='login-username']"));
             var loginUserButton = driver.FindElement(By.XPath("//*[@id='login-signin']"));            
-            userNameField.SendKeys(user.UserName);
+            // userNameField.SendKeys(user.UserName);
+            userNameField.SendKeys("testscraper");      
             loginUserButton.Click();
 
             // waiting 5 seconds for page to load then to go onto enter password. need to throw an exception here
@@ -163,22 +164,15 @@ namespace FinanceScraper3.Services
 
             newSnapshot.UserId = user.Id;
 
-            System.Console.WriteLine("PORT ID IS {0} ", newSnapshot.Id);
 
 
             // ctx.Portfolios.Add(snapshot);
             _context.Portfolios.Add(newSnapshot);
 
-            System.Console.WriteLine("PORT ID IS {0} ", newSnapshot.Id);
-            
             
             var saveResult = await _context.SaveChangesAsync();
 
-        
-            
-
-            System.Console.WriteLine("PORT ID IS {0} ", newSnapshot.Id);
-            
+                    
 
             if (saveResult > 0)
             {
