@@ -32,6 +32,8 @@ namespace FinanceScraper3.Models
         public string Notes {get; set; }
 
         public int Id { get; set; }
+
+        public string PortId { get; set; }
            
         public virtual Portfolio Portfolio { get; set; }    
 

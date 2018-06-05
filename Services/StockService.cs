@@ -17,10 +17,30 @@ namespace FinanceScraper3.Services
             _context = context;
         }
 
-        public async Task<Stock[]> GetStocksAsync()
+        public async Task<Stock[]> GetStocksAsync(int id)
         {
-            return await _context.Stocks.ToArrayAsync();
+
+            // var test = _context.Stocks.Find(id);
+
+            // var test = test.ToArrayAsync();
+
+            // test.Find(id);
+
+            // var test = id.ToString();
+            var test = id;
+            
+
+            // return await _context.Stocks
+            // .Where(x=> x.PortId == test).ToArrayAsync();
+
+              return await _context.Stocks
+            .Where(x=> x.Portfolio.Id == test).ToArrayAsync();
+
+            // return await _context.Stocks.ToArrayAsync();
+
+            // return await test;
             
         }
     }
 }
+

@@ -18,9 +18,10 @@
                 <td>Date Snapped</td>
                 <td>Total Value</td>
                 <td>Day Gain</td>
-                <td>Day Gain Percentage</td>
+                <td>Day Gain %</td>
                 <td>Total Gain</td>
-                <td>Total Gain Percentage</td>
+                <td>Total Gain %</td>
+                <td>See more</td>
 
             </tr>
         </thead>
@@ -29,15 +30,16 @@
             <span>no items found</span>
         }
         else {
-        @foreach (var stock in Model.PortfolioSnapshots)
+        @foreach (var snapshot in Model.PortfolioSnapshots)
         {   
             <tr>
-                <td>@stock.Date</td>
-                <td>@stock.TotalValue</td>
-                <td>@stock.DayGain</td>
-                <td>@stock.DayGainPercent</td>
-                <td>@stock.TotalGain</td>
-                <td>@stock.TotalGainPercent</td>
+                <td>@snapshot.Date</td>
+                <td>@snapshot.TotalValue</td>
+                <td>@snapshot.DayGain</td>
+                <td>@snapshot.DayGainPercent</td>
+                <td>@snapshot.TotalGain</td>
+                <td>@snapshot.TotalGainPercent</td>
+                <td><a asp-controller="Stocks" asp-route-id="@snapshot.Id">Click for more info</a></td>
             </tr>
             }
         }

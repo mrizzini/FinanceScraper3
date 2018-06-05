@@ -25,13 +25,30 @@ namespace FinanceScraper3.Controllers
             _stockService = stockService;
         }
  
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            var stocks = await _stockService.GetStocksAsync();
+            // if (id == null)
+            // {
+            //     return BadRequest(new { error = "No Scrape ID found" });
+            // }
+
+            // Movie movie = _stockService.Stocks.Find(id);
+            // if (movie == null)
+            // {
+            //     return HttpNotFound();
+            // }
+            // return View(movie);
+
+            System.Console.WriteLine("ID IS {0}", id);
+
+            var stocks = await _stockService.GetStocksAsync(id);
+
+            // stocks = stocks.Find(id)
 
             var model = new StockViewModel()
             {
-                Stocks = stocks
+                Stocks = stocks,
+                PortfolioId = id
             };
 
             return View(model);

@@ -88,6 +88,8 @@ namespace FinanceScraper3.Controllers
             return RedirectToAction("Index");
         }
 
+        
+
 
         // NewSnapshot
         // public IActionResult NewSnapshot()

@@ -43,13 +43,10 @@ namespace FinanceScraper3.Services
             ChromeOptions option = new ChromeOptions();
             option.AddArgument("--headless");
 
-            
-
             // create new driver class
             var driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0", option);            
 
             driver.Navigate().GoToUrl("https://login.yahoo.com/config/login?.intl=us&.lang=en-US&.src=finance&.done=https%3A%2F%2Ffinance.yahoo.com%2F");
-
 
             // navigating to username input box and clicking to sign in
             var userNameField = driver.FindElement(By.XPath("//*[@id='login-username']"));
@@ -67,14 +64,10 @@ namespace FinanceScraper3.Services
             // userPasswordField.SendKeys(user.UserName);
             loginPasswordButton.Click();
 
-            // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15); 
-
-
             // var portfolioButton = driver.FindElement(By.XPath("//*[@id='Nav-0-DesktopNav']/div/div[3]/div/div[1]/ul/li[2]"));
-
             // portfolioButton.Click();
 
-             driver.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_0/view/v2");
+            driver.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_0/view/v2");
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);  
 
@@ -93,23 +86,16 @@ namespace FinanceScraper3.Services
             }
 
             // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);  
-            
             // var myScraperButton = driver.FindElement(By.XPath("//*[@id='main']/section/section/div[2]/table/tbody/tr[2]/td[1]/a"));
-
             // myScraperButton.Click();
             
-
-
-
 
             var totalValue = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[1]")).Text;
             
             var dayGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[2]/span")).Text.Split(" ");
 
-
             var totalGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[3]/span")).Text.Split(" ");
 
-            
             newSnapshot.Date = DateTime.Now;
             
             newSnapshot.TotalValue = Double.Parse(totalValue, NumberStyles.Currency);
@@ -166,7 +152,7 @@ namespace FinanceScraper3.Services
                 TotalGainByDollar = Double.Parse(totalGainByDollarAndPercent[1]),
                 TotalGainByPercent = (Double.Parse(totalGainByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
                 Lots = Double.Parse(lotSplit[0]),
-                Notes = stockInfo[8]
+                Notes = stockInfo[8],
             });
             
             }
@@ -177,10 +163,22 @@ namespace FinanceScraper3.Services
 
             newSnapshot.UserId = user.Id;
 
+            System.Console.WriteLine("PORT ID IS {0} ", newSnapshot.Id);
+
+
             // ctx.Portfolios.Add(snapshot);
             _context.Portfolios.Add(newSnapshot);
+
+            System.Console.WriteLine("PORT ID IS {0} ", newSnapshot.Id);
+            
             
             var saveResult = await _context.SaveChangesAsync();
+
+        
+            
+
+            System.Console.WriteLine("PORT ID IS {0} ", newSnapshot.Id);
+            
 
             if (saveResult > 0)
             {
@@ -190,7 +188,6 @@ namespace FinanceScraper3.Services
             {
                 return false;
             }
-            // return saveResult == 1;
             // if operation was successful, we will return true, because saveResult should == how many objects were saved to DB. If it is less than 0, we know it failed and return false
 
             // return snapshot;

@@ -32,14 +32,14 @@ namespace FinanceScraper3.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "About Scrapecity";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "My contact info.";
 
             return View();
         }
