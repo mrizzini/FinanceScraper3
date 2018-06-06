@@ -11,7 +11,6 @@ namespace FinanceScraper3.Models
         public int Id { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Date { get; set; }
 
         [DataType(DataType.Currency)]
