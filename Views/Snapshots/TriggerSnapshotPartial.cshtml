@@ -1,21 +1,9 @@
 @model Portfolio
 
-@*
-
-<p>If you'd like to trigger a new snap shot of your portfolio, please click the button below</p>
-
-<!-- <button id="new-snap" class="btn btn-info">Trigger New Snapshot</button> -->
-
-*@
-
 
 <form asp-action="TriggerSnapshot" method="POST">
-    <label>If you'd like to trigger a new snap shot of your portfolio, please click the "Trigger" button below</label>
+    <label>If you'd like to trigger a new snapshot of your portfolio, please click the "Trigger" button below</label>
     <br>
     <button type="submit">Trigger</button>
 </form>
 
-@*
-        <button type="button" value= "NewSnapshot" onclick="location.href='@Url.Action("NewSnapshot", "Snapshots")'">Trigger New Snapshot</button>
-
-        *@

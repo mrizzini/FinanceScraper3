@@ -1,26 +1,30 @@
 @model FinanceScraper3.Models.StockViewModel
 
 @{
-    ViewData["Title"] = "Your stocks";
+    ViewData["Title"] = "Your stocks for this snapshot:";
 }
 
+<br>
 
 <div class="panel panel-default todo-panel">
-    <div class="panel-heading">@ViewData["Title"]</div>
+    <div style="font-weight: bold" class="panel-heading">
+        <h3>@ViewData["Title"]</h3>
+    </div>
+    <br>
     <table class="table table-hover">
         <thead>
-            <tr>
+            <tr style="font-weight: bold">
                 <td>Stock</td>
                 <td>Price</td>
-                <td>Change By Dollar</td>
-                <td>Change By Percent</td>
+                <td>Change By $</td>
+                <td>Change By %</td>
                 <td>Shares</td>
                 <td>Cost Basis</td>
                 <td>Market Value</td>
-                <td>Day Gain By Dollar</td>
-                <td>Day Gain By Percent</td>
-                <td>Total Gain By Dollar</td>
-                <td>Total Gain By Percent</td>
+                <td>Day Gain By $</td>
+                <td>Day Gain By %</td>
+                <td>Total Gain By $</td>
+                <td>Total Gain By %</td>
                 <td>Lots</td>
                 <td>Notes</td>
             </tr>
@@ -33,19 +37,19 @@
         @foreach (var snap in Model.Stocks)
         {   
             <tr>
-                <td>@snap.StockSymbol</td>
-                <td>@snap.CurrentPrice</td>
-                <td>@snap.ChangeByDollar</td>
-                <td>@snap.ChangeByPercent</td>
-                <td>@snap.Shares</td>
-                <td>@snap.CostBasis</td>
-                <td>@snap.MarketValue</td>
-                <td>@snap.DayGainByDollar</td>
-                <td>@snap.DayGainByPercent</td>
-                <td>@snap.TotalGainByDollar</td>
-                <td>@snap.TotalGainByPercent</td>
-                <td>@snap.Lots</td>
-                <td>@snap.Notes</td>
+                <td style="font-weight: bold">@Html.DisplayFor(x => snap.StockSymbol)</td>
+                <td>@Html.DisplayFor(x => snap.CurrentPrice)</td>
+                <td>@Html.DisplayFor(x => snap.ChangeByDollar)</td>
+                <td>@Html.DisplayFor(x => snap.ChangeByPercent)</td>
+                <td>@Html.DisplayFor(x => snap.Shares)</td>
+                <td>@Html.DisplayFor(x => snap.CostBasis)</td>
+                <td>@Html.DisplayFor(x => snap.MarketValue)</td>
+                <td>@Html.DisplayFor(x => snap.DayGainByDollar)</td>
+                <td>@Html.DisplayFor(x => snap.DayGainByPercent)</td>
+                <td>@Html.DisplayFor(x => snap.TotalGainByDollar)</td>
+                <td>@Html.DisplayFor(x => snap.TotalGainByPercent)</td>
+                <td>@Html.DisplayFor(x => snap.Lots)</td>
+                <td>@Html.DisplayFor(x => snap.Notes)</td>
             </tr>
             }
         }

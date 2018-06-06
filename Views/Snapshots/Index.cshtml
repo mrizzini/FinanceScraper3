@@ -1,20 +1,22 @@
 @model FinanceScraper3.Models.PortfolioViewModel
 
 @{
-    ViewData["Title"] = "Snapshots";
+    ViewData["Title"] = "Your Snapshots";
 }
 
-<h2>Your Snapshots:</h2>
-
+<br>
 
 <div class="panel panel-default todo-panel">
-    <div class="panel-heading">@ViewData["Title"]</div>
+    <div class="panel-heading">
+        <h3>@ViewData["Title"]</h3>
+        <h5>Click each date for more details</h5>
+    </div>
 
-
+<br>
 
     <table class="table table-hover">
         <thead>
-            <tr>
+            <tr style="font-weight: bold">
                 <td>Date Snapped</td>
                 <td>Total Value</td>
                 <td>Day Gain</td>
@@ -32,18 +34,16 @@
         {   
             <tr>
                 <td><a asp-controller="Stocks" asp-route-id="@snapshot.Id">@snapshot.Date</a></td>
-                <td>@snapshot.TotalValue</td>
-                <td>@snapshot.DayGain</td>
-                <td>@snapshot.DayGainPercent</td>
-                <td>@snapshot.TotalGain</td>
-                <td>@snapshot.TotalGainPercent</td>
-
+                <td>@Html.DisplayFor(x => snapshot.TotalValue)</td>
+                <td>@Html.DisplayFor(x => snapshot.DayGain)</td>
+                <td>@Html.DisplayFor(x => snapshot.DayGainPercent)</td>
+                <td>@Html.DisplayFor(x => snapshot.TotalGain)</td>
+                <td>@Html.DisplayFor(x => snapshot.TotalGainPercent)</td>
+                <td></td>
             </tr>
             }
         }
     </table>
-
-
 
 
 
