@@ -13,10 +13,9 @@ namespace FinanceScraper3.Models
         public double CurrentPrice { get; set; }
         
         [DataType(DataType.Currency)]
-        
         public double ChangeByDollar { get; set; }
-        [DisplayFormat(DataFormatString = "{0:P2}")]
         
+        [DisplayFormat(DataFormatString = "{0:P2}")]
         public double ChangeByPercent { get; set; }
         
         public double Shares { get; set; }
@@ -31,9 +30,8 @@ namespace FinanceScraper3.Models
         public double DayGainByDollar { get; set; }
         
         [DisplayFormat(DataFormatString = "{0:P2}")]
-        
         public double DayGainByPercent { get; set; } 
-        
+    
         [DataType(DataType.Currency)]
         public double TotalGainByDollar { get; set; }
         
