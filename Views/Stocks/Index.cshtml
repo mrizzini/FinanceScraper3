@@ -34,25 +34,24 @@
             <span>no items found</span>
         }
         else {
-        @foreach (var snap in Model.Stocks)
-        {   
-            <tr>
-                <td style="font-weight: bold">@Html.DisplayFor(x => snap.StockSymbol)</td>
-                <td>@Html.DisplayFor(x => snap.CurrentPrice)</td>
-                <td>@Html.DisplayFor(x => snap.ChangeByDollar)</td>
-                <td>@Html.DisplayFor(x => snap.ChangeByPercent)</td>
-                <td>@Html.DisplayFor(x => snap.Shares)</td>
-                <td>@Html.DisplayFor(x => snap.CostBasis)</td>
-                <td>@Html.DisplayFor(x => snap.MarketValue)</td>
-                <td>@Html.DisplayFor(x => snap.DayGainByDollar)</td>
-                <td>@Html.DisplayFor(x => snap.DayGainByPercent)</td>
-                <td>@Html.DisplayFor(x => snap.TotalGainByDollar)</td>
-                <td>@Html.DisplayFor(x => snap.TotalGainByPercent)</td>
-                <td>@Html.DisplayFor(x => snap.Lots)</td>
-                <td>@Html.DisplayFor(x => snap.Notes)</td>
-            </tr>
-            }
+            @foreach (var snap in Model.Stocks)
+            {   
+                <tr>
+                    <td style="font-weight: bold">@Html.DisplayFor(x => snap.StockSymbol)</td>
+                    <td>@Html.DisplayFor(x => snap.CurrentPrice)</td>
+                    <td>@Html.DisplayFor(x => snap.ChangeByDollar)</td>
+                    <td>@Html.DisplayFor(x => snap.ChangeByPercent)</td>
+                    <td>@Html.DisplayFor(x => snap.Shares)</td>
+                    <td>@Html.DisplayFor(x => snap.CostBasis)</td>
+                    <td>@Html.DisplayFor(x => snap.MarketValue)</td>
+                    <td>@Html.DisplayFor(x => snap.DayGainByDollar)</td>
+                    <td>@Html.DisplayFor(x => snap.DayGainByPercent)</td>
+                    <td>@Html.DisplayFor(x => snap.TotalGainByDollar)</td>
+                    <td>@Html.DisplayFor(x => snap.TotalGainByPercent)</td>
+                    <td>@Html.DisplayFor(x => snap.Lots)</td>
+                    <td>@Html.DisplayFor(x => snap.Notes)</td>
+                </tr>
+                }
         }
     </table>
-
-    </div>
+</div>

@@ -5,7 +5,6 @@
 }
 
 <br>
-
 <div class="panel panel-success">
     <div class="panel-heading">
         <h3>@ViewData["Title"]</h3>
@@ -42,53 +41,6 @@
         }
     </table>
 
-
-
 <div class= "panel-footer new-snapshot-form">
     @await Html.PartialAsync("TriggerSnapshotPartial", new Portfolio())
 </div>
-
-
-
-
-@*
-@model FinanceScraper3.Models.Portfolio
-
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-*@
-
-@*
-
-<p>If you'd like to trigger a new snap shot of your portfolio, please click the button below</p>
-
-<!-- <button id="new-snap" class="btn btn-info">Trigger New Snapshot</button> -->
-
-
-        <button type="button" value= "NewSnapshot" onclick="location.href='@Url.Action("NewSnapshot", "Snapshots")'">Trigger New Snapshot</button>
-
-*@
-
-
-@*
-@section scripts
-{
-    <script>
-
-        $(document).ready(function () {
-
-        var newSnap = $('#new-snap');
-        // newSnap.click(function(){
-        //     alert("scraper running"); 
-        // });
-            newSnap.click(function(){
-                // alert("scraper running"); 
-                var url = '@Url.Action("NewSnapshot", "Snapshots")';
-        });
-    });
-
-
-    </script>
-}
-*@
