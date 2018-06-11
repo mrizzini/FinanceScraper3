@@ -39,7 +39,7 @@ namespace FinanceScraper3.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "My contact info.";
+            ViewData["Message"] = "My contact info:";
 
             return View();
         }
