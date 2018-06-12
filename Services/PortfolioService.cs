@@ -36,8 +36,41 @@ namespace FinanceScraper3.Services
 
             switch (sortOrder)
             {
+                case "Date":
+                    snapshot = snapshot.OrderBy(s => s.Date);
+                    break;
                 case "date_desc":
                     snapshot = snapshot.OrderByDescending(s => s.Date);
+                    break;
+                case "TotalValue":
+                    snapshot = snapshot.OrderBy(s => s.TotalValue);
+                    break;
+                case "totalvalue_desc":
+                    snapshot = snapshot.OrderByDescending(s => s.TotalValue);
+                    break;
+                case "DayGain":
+                    snapshot = snapshot.OrderBy(s => s.DayGain);
+                    break;
+                case "daygain_desc":
+                    snapshot = snapshot.OrderByDescending(s => s.DayGain);
+                    break;
+                case "DayGainPercent":
+                    snapshot = snapshot.OrderBy(s => s.DayGainPercent);
+                    break;
+                case "daygainpercent_desc":
+                    snapshot = snapshot.OrderByDescending(s => s.DayGainPercent);
+                    break;
+                case "TotalGain":
+                    snapshot = snapshot.OrderBy(s => s.TotalGain);
+                    break;
+                case "totalgain_desc":
+                    snapshot = snapshot.OrderByDescending(s => s.TotalGain);
+                    break;
+                case "TotalGainPercent":
+                    snapshot = snapshot.OrderBy(s => s.TotalGainPercent);
+                    break;
+                case "totalgainpercent_desc":
+                    snapshot = snapshot.OrderByDescending(s => s.TotalGainPercent);
                     break;
                 default:
                     snapshot = snapshot.OrderBy(s => s.Date);

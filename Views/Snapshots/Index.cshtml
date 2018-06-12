@@ -16,11 +16,12 @@
         <thead>
             <tr style="font-weight: bold">
                 <th><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">Date of Snapshot</a></th>
-                <th>Total Value</th>
-                <th>Day Gain</th>
-                <th>Day Gain %</th>
-                <th>Total Gain</th>
-                <th>Total Gain %</th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalValueSortParm"]">Total Value</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["DayGainSortParm"]">Day Gain</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["DayGainPercentSortParm"]">Day Gain %</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalGainSortParm"]">Total Gain</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalGainPercentSortParm"]">Total Gain %</a></th>
+
             </tr>
         </thead>
 
