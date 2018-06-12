@@ -22,17 +22,35 @@ namespace FinanceScraper3.Services
     public class PortfolioService : IPortfolioService
     {
         private readonly ApplicationDbContext _context;
-
+       
         public PortfolioService(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Portfolio[]> GetPortfolioSnapshotsAsync(ApplicationUser user)
+        public async Task<Portfolio[]> GetPortfolioSnapshotsAsync(ApplicationUser user, string sortOrder)
         {
-            return await _context.Portfolios
-            .Where(x=> x.UserId == user.Id)
-            .ToArrayAsync();
+
+            IQueryable<Portfolio> snapshot = from s in _context.Portfolios
+                                             select s;
+
+            switch (sortOrder)
+            {
+                case "date_desc":
+                    snapshot = snapshot.OrderByDescending(s => s.Date);
+                    break;
+                default:
+                    snapshot = snapshot.OrderBy(s => s.Date);
+                    break;
+            }
+
+            return await snapshot
+                        .Where(x=> x.UserId == user.Id)
+                        .AsNoTracking().ToArrayAsync();
+
+            // return await _context.Portfolios
+            // .Where(x=> x.UserId == user.Id)
+            // .ToArrayAsync();
         }
 
         public async Task<bool> TriggerSnapshotAsync(Portfolio newSnapshot, ApplicationUser user)

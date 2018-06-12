@@ -33,13 +33,12 @@ namespace FinanceScraper3.Controllers
         {
             _portfolioService = portfolioService;
             _userManager = userManager;
-            // _ctx = ctx;
         }
         
 
 
         // Index = /Snapshots
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
             // returns a Task<Portfolio[]>. We may not have the result right away so we use the await keyword so the code waits until the result is ready before continuing
             // await lets the code pause on an async operation and the pick up where it left off when the database request finishes, and the rest of our app isnt blocked
@@ -55,13 +54,14 @@ namespace FinanceScraper3.Controllers
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser == null) return Challenge();
 
-            var portfolioSnapshots = await _portfolioService.GetPortfolioSnapshotsAsync(currentUser);
+            var portfolioSnapshots = await _portfolioService.GetPortfolioSnapshotsAsync(currentUser, sortOrder);
 
             var model = new PortfolioViewModel()
             {
                 PortfolioSnapshots = portfolioSnapshots
             };
 
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
 
             return View(model);
         }
@@ -87,23 +87,6 @@ namespace FinanceScraper3.Controllers
 
             return RedirectToAction("Index");
         }
-
-        
-
-
-        // NewSnapshot
-        // public IActionResult NewSnapshot()
-        // {
-
-        //     var snapshot = Scrape.ScrapeData();
-
-        //     _ctx.Portfolios.Add(snapshot);
-        //     _ctx.SaveChanges();
-
-        //     return Content("test");
-
-        // }
-        
 
     }
 }

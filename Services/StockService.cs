@@ -22,7 +22,8 @@ namespace FinanceScraper3.Services
             var snapId = id;
     
             return await _context.Stocks
-            .Where(x=> x.Portfolio.Id == snapId).ToArrayAsync();
+            .Where(x=> x.Portfolio.Id == snapId)
+            .ToArrayAsync();
         }
     }
 }

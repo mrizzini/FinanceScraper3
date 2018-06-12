@@ -8,7 +8,7 @@ namespace FinanceScraper3.Services
 {
     public interface IPortfolioService
     {
-        Task<Portfolio[]> GetPortfolioSnapshotsAsync(ApplicationUser user);
+        Task<Portfolio[]> GetPortfolioSnapshotsAsync(ApplicationUser user, string sortOrder);
 
         Task<bool> TriggerSnapshotAsync(Portfolio newSnapshot, ApplicationUser user);
     }

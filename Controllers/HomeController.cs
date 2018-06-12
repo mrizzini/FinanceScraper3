@@ -12,19 +12,7 @@ using FinanceScraper3.Data;
 namespace FinanceScraper3.Controllers
 {
     public class HomeController : Controller
-    {
-
-        // private readonly ApplicationDbContext ctx;
-
-        // public HomeController(ApplicationDbContext ctx)
-        // {
-        //     this.ctx = ctx;
-        // }
-
-
-        
-        //  = new ApplicationDbContext();
-        
+    {        
         public IActionResult Index()
         {
             return View();
