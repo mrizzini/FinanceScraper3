@@ -25,10 +25,8 @@ namespace FinanceScraper3.Controllers
             _stockService = stockService;
         }
  
-        public async Task<IActionResult> Index(int id, string sortOrder)
+        public async Task<IActionResult> Index(int id, string sortOrder, string searchString)
         {
-
-            System.Console.WriteLine("ID IS {0}", id);
 
             ViewData["StockSymbolSortParm"] = sortOrder == "StockSymbol" ? "stocksymbol_desc" : "StockSymbol";
             ViewData["CurrentPriceSortParm"] = sortOrder == "CurrentPrice" ? "currentprice_desc" : "CurrentPrice";
@@ -44,20 +42,11 @@ namespace FinanceScraper3.Controllers
             ViewData["LotsSortParm"] = sortOrder == "Lots" ? "lots_desc" : "Lots";
             ViewData["NotesSortParm"] = sortOrder == "Notes" ? "notes_desc" : "Notes";
 
-
-
-
-
-
-
-
-
-
-
+            ViewData["CurrentFilter"] = searchString;
 
              
 
-            var stocks = await _stockService.GetStocksAsync(id, sortOrder);
+            var stocks = await _stockService.GetStocksAsync(id, sortOrder, searchString);
 
             var model = new StockViewModel()
             {

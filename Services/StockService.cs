@@ -17,12 +17,17 @@ namespace FinanceScraper3.Services
             _context = context;
         }
 
-        public async Task<Stock[]> GetStocksAsync(int id, string sortOrder)
+        public async Task<Stock[]> GetStocksAsync(int id, string sortOrder, string searchString)
         {
             var snapId = id;
 
             IQueryable<Stock> stock = from s in _context.Stocks
                                              select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                stock = stock.Where(s => s.StockSymbol.ToUpper().Contains(searchString.ToUpper()));
+            }
+
 
             switch (sortOrder)
             {
