@@ -3,10 +3,7 @@
 @{
     ViewData["Title"] = "Your stocks for this snapshot:";
 }
-
-<br><br><br>
-
-
+<br>
 
     <h2>@ViewData["Title"]</h2>
 
@@ -16,7 +13,7 @@
                 <td><a asp-action="Index" asp-route-sortOrder="@ViewData["StockSymbolSortParm"]">Symbol</a></td>
                 <td><a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentPriceSortParm"]">Price</a></td>
                 <td><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByDollarSortParm"]">Change By $</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByPercentSortParm"]">Change By %</a></td>                
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByPercentSortParm"]">Change By %</a></td>          
                 <td><a asp-action="Index" asp-route-sortOrder="@ViewData["SharesSortParm"]">Shares</a></td>
                 <td><a asp-action="Index" asp-route-sortOrder="@ViewData["CostBasisSortParm"]">Cost Basis</a></td>
                 <td><a asp-action="Index" asp-route-sortOrder="@ViewData["MarketValueSortParm"]">Market Value</a></td>

@@ -68,15 +68,6 @@ namespace FinanceScraper3.Controllers
                 PortfolioSnapshots = portfolioSnapshots
             };
 
-            // ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-            // ViewData["TotalValueSortParm"] = sortOrder == "TotalValue" ? "totalvalue_desc" : "TotalValue";
-            // ViewData["DayGainSortParm"] = sortOrder == "DayGain" ? "daygain_desc" : "DayGain";
-            // ViewData["DayGainPercentSortParm"] = sortOrder == "DayGainPercent" ? "daygainpercent_desc" : "DayGainPercent";
-            // ViewData["TotalGainSortParm"] = sortOrder == "TotalGain" ? "totalgain_desc" : "TotalGain";
-            // ViewData["TotalGainPercentSortParm"] = sortOrder == "TotalGainPercent" ? "totalgainpercent_desc" : "TotalGainPercent";
-
-
-
             return View(model);
         }
 
