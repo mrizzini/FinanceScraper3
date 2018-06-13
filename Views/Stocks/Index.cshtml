@@ -13,19 +13,19 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr style="font-weight: bold">
-                <td>Stock</td>
-                <td>Price</td>
-                <td>Change By $</td>
-                <td>Change By %</td>
-                <td>Shares</td>
-                <td>Cost Basis</td>
-                <td>Market Value</td>
-                <td>Day Gain By $</td>
-                <td>Day Gain By %</td>
-                <td>Total Gain By $</td>
-                <td>Total Gain By %</td>
-                <td>Lots</td>
-                <td>Notes</td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["StockSymbolSortParm"]">Symbol</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentPriceSortParm"]">Price</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByDollarSortParm"]">Change By $</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByPercentSortParm"]">Change By %</a></td>                
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["SharesSortParm"]">Shares</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["CostBasisSortParm"]">Cost Basis</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["MarketValueSortParm"]">Market Value</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["DayGainByDollarSortParm"]">Day Gain By $</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["DayGainByPercentSortParm"]">Day Gain By %</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalGainByDollarSortParm"]">Total Gain By $</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalGainByPercentSortParm"]">Total Gain By %</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["LotsSortParm"]">Lots</a></td>
+                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["NotesSortParm"]">Notes</a></td>
             </tr>
         </thead>
 

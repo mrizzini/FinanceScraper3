@@ -7,7 +7,7 @@ namespace FinanceScraper3.Services
 {
     public interface IStockService
     {
-        Task<Stock[]> GetStocksAsync(int id);
+        Task<Stock[]> GetStocksAsync(int id, string sortOrder);
         // a task that contains an array of stocks
     }
 }

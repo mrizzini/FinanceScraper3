@@ -25,25 +25,39 @@ namespace FinanceScraper3.Controllers
             _stockService = stockService;
         }
  
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int id, string sortOrder)
         {
-            // if (id == null)
-            // {
-            //     return BadRequest(new { error = "No Scrape ID found" });
-            // }
-
-            // Movie movie = _stockService.Stocks.Find(id);
-            // if (movie == null)
-            // {
-            //     return HttpNotFound();
-            // }
-            // return View(movie);
 
             System.Console.WriteLine("ID IS {0}", id);
 
-            var stocks = await _stockService.GetStocksAsync(id);
+            ViewData["StockSymbolSortParm"] = sortOrder == "StockSymbol" ? "stocksymbol_desc" : "StockSymbol";
+            ViewData["CurrentPriceSortParm"] = sortOrder == "CurrentPrice" ? "currentprice_desc" : "CurrentPrice";
+            ViewData["ChangeByDollarSortParm"] = sortOrder == "ChangeByDollar" ? "changebydollar_desc" : "ChangeByDollar";
+            ViewData["ChangeByPercentSortParm"] = sortOrder == "ChangeByPercent" ? "changebypercent_desc" : "ChangeByPercent";
+            ViewData["SharesSortParm"] = sortOrder == "Shares" ? "shares_desc" : "Shares";
+            ViewData["CostBasisSortParm"] = sortOrder == "CostBasis" ? "costbasis_desc" : "CostBasis";
+            ViewData["MarketValueSortParm"] = sortOrder == "MarketValue" ? "marketvalue_desc" : "MarketValue";
+            ViewData["DayGainByDollarSortParm"] = sortOrder == "DayGainByDollar" ? "daygainbydollar_desc" : "DayGainByDollar";
+            ViewData["DayGainByPercentSortParm"] = sortOrder == "DayGainByPercent" ? "daygainbypercent_desc" : "DayGainByPercent";
+            ViewData["TotalGainByDollarSortParm"] = sortOrder == "TotalGainByDollar" ? "totalgainbydollar_desc" : "TotalGainByDollar";
+            ViewData["TotalGainByPercentSortParm"] = sortOrder == "TotalGainByPercent" ? "totalgainbypercent_desc" : "TotalGainByPercent";
+            ViewData["LotsSortParm"] = sortOrder == "Lots" ? "lots_desc" : "Lots";
+            ViewData["NotesSortParm"] = sortOrder == "Notes" ? "notes_desc" : "Notes";
 
-            // stocks = stocks.Find(id)
+
+
+
+
+
+
+
+
+
+
+
+             
+
+            var stocks = await _stockService.GetStocksAsync(id, sortOrder);
 
             var model = new StockViewModel()
             {

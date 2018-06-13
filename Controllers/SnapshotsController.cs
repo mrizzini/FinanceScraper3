@@ -54,6 +54,13 @@ namespace FinanceScraper3.Controllers
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser == null) return Challenge();
 
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["TotalValueSortParm"] = sortOrder == "TotalValue" ? "totalvalue_desc" : "TotalValue";
+            ViewData["DayGainSortParm"] = sortOrder == "DayGain" ? "daygain_desc" : "DayGain";
+            ViewData["DayGainPercentSortParm"] = sortOrder == "DayGainPercent" ? "daygainpercent_desc" : "DayGainPercent";
+            ViewData["TotalGainSortParm"] = sortOrder == "TotalGain" ? "totalgain_desc" : "TotalGain";
+            ViewData["TotalGainPercentSortParm"] = sortOrder == "TotalGainPercent" ? "totalgainpercent_desc" : "TotalGainPercent";
+
             var portfolioSnapshots = await _portfolioService.GetPortfolioSnapshotsAsync(currentUser, sortOrder);
 
             var model = new PortfolioViewModel()
@@ -61,12 +68,12 @@ namespace FinanceScraper3.Controllers
                 PortfolioSnapshots = portfolioSnapshots
             };
 
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-            ViewData["TotalValueSortParm"] = sortOrder == "TotalValue" ? "totalvalue_desc" : "TotalValue";
-            ViewData["DayGainSortParm"] = sortOrder == "DayGain" ? "daygain_desc" : "DayGain";
-            ViewData["DayGainPercentSortParm"] = sortOrder == "DayGainPercent" ? "daygainpercent_desc" : "DayGainPercent";
-            ViewData["TotalGainSortParm"] = sortOrder == "TotalGain" ? "totalgain_desc" : "TotalGain";
-            ViewData["TotalGainPercentSortParm"] = sortOrder == "TotalGainPercent" ? "totalgainpercent_desc" : "TotalGainPercent";
+            // ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            // ViewData["TotalValueSortParm"] = sortOrder == "TotalValue" ? "totalvalue_desc" : "TotalValue";
+            // ViewData["DayGainSortParm"] = sortOrder == "DayGain" ? "daygain_desc" : "DayGain";
+            // ViewData["DayGainPercentSortParm"] = sortOrder == "DayGainPercent" ? "daygainpercent_desc" : "DayGainPercent";
+            // ViewData["TotalGainSortParm"] = sortOrder == "TotalGain" ? "totalgain_desc" : "TotalGain";
+            // ViewData["TotalGainPercentSortParm"] = sortOrder == "TotalGainPercent" ? "totalgainpercent_desc" : "TotalGainPercent";
 
 
 
