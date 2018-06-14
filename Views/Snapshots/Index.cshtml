@@ -17,26 +17,27 @@
                 <th><a asp-action="Index" asp-route-sortOrder="@ViewData["DayGainPercentSortParm"]">Day Gain %</a></th>
                 <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalGainSortParm"]">Total Gain</a></th>
                 <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalGainPercentSortParm"]">Total Gain %</a></th>
-
             </tr>
         </thead>
 
-        @if(Model == null){
+        @if(Model == null)
+        {
             <span>no items found</span>
         }
-        else {
-        @foreach (var snapshot in Model.PortfolioSnapshots)
-        {   
-            <tr>
-                <td><a asp-controller="Stocks" asp-route-id="@snapshot.Id">@snapshot.Date</a></td>
-                <td>@Html.DisplayFor(x => snapshot.TotalValue)</td>
-                <td>@Html.DisplayFor(x => snapshot.DayGain)</td>
-                <td>@Html.DisplayFor(x => snapshot.DayGainPercent)</td>
-                <td>@Html.DisplayFor(x => snapshot.TotalGain)</td>
-                <td>@Html.DisplayFor(x => snapshot.TotalGainPercent)</td>
-            </tr>
+        else 
+        {
+            @foreach (var snapshot in Model.PortfolioSnapshots)
+            {   
+                <tr>
+                    <td><a asp-controller="Stocks" asp-route-id="@snapshot.Id">@snapshot.Date</a></td>
+                    <td>@Html.DisplayFor(x => snapshot.TotalValue)</td>
+                    <td>@Html.DisplayFor(x => snapshot.DayGain)</td>
+                    <td>@Html.DisplayFor(x => snapshot.DayGainPercent)</td>
+                    <td>@Html.DisplayFor(x => snapshot.TotalGain)</td>
+                    <td>@Html.DisplayFor(x => snapshot.TotalGainPercent)</td>
+                </tr>
             }
-        }
+    }
     </table>
 
 <div class= "panel-footer new-snapshot-form">

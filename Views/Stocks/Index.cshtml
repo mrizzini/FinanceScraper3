@@ -20,26 +20,28 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr style="font-weight: bold">
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["StockSymbolSortParm"]">Symbol</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentPriceSortParm"]">Price</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByDollarSortParm"]">Change By $</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByPercentSortParm"]">Change By %</a></td>          
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["SharesSortParm"]">Shares</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["CostBasisSortParm"]">Cost Basis</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["MarketValueSortParm"]">Market Value</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["DayGainByDollarSortParm"]">Day Gain By $</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["DayGainByPercentSortParm"]">Day Gain By %</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalGainByDollarSortParm"]">Total Gain By $</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalGainByPercentSortParm"]">Total Gain By %</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["LotsSortParm"]">Lots</a></td>
-                <td><a asp-action="Index" asp-route-sortOrder="@ViewData["NotesSortParm"]">Notes</a></td>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["StockSymbolSortParm"]">Symbol</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentPriceSortParm"]">Price</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByDollarSortParm"]">Change By $</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByPercentSortParm"]">Change By %</a></th>          
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["SharesSortParm"]">Shares</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["CostBasisSortParm"]">Cost Basis</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["MarketValueSortParm"]">Market Value</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["DayGainByDollarSortParm"]">Day Gain By $</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["DayGainByPercentSortParm"]">Day Gain By %</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalGainByDollarSortParm"]">Total Gain By $</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TotalGainByPercentSortParm"]">Total Gain By %</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["LotsSortParm"]">Lots</a></th>
+                <th><a asp-action="Index" asp-route-sortOrder="@ViewData["NotesSortParm"]">Notes</a></th>
             </tr>
         </thead>
 
-        @if(Model == null){
+        @if(Model == null)
+        {
             <span>no items found</span>
         }
-        else {
+        else 
+        {
             @foreach (var snap in Model.Stocks)
             {   
                 <tr>
@@ -57,6 +59,6 @@
                     <td>@Html.DisplayFor(x => snap.Lots)</td>
                     <td>@Html.DisplayFor(x => snap.Notes)</td>
                 </tr>
-                }
+            }
         }
     </table>
