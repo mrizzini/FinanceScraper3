@@ -17,7 +17,6 @@ namespace FinanceScraper3.Controllers
     [Authorize]
     public class StocksController : Controller
     {
-
         private readonly IStockService _stockService;
 
         public StocksController(IStockService stockService)
@@ -43,8 +42,6 @@ namespace FinanceScraper3.Controllers
             ViewData["NotesSortParm"] = sortOrder == "Notes" ? "notes_desc" : "Notes";
 
             ViewData["CurrentFilter"] = searchString;
-
-             
 
             var stocks = await _stockService.GetStocksAsync(id, sortOrder, searchString);
 

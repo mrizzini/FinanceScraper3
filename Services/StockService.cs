@@ -28,7 +28,6 @@ namespace FinanceScraper3.Services
                 stock = stock.Where(s => s.StockSymbol.ToUpper().Contains(searchString.ToUpper()));
             }
 
-
             switch (sortOrder)
             {
                 case "StockSymbol":
@@ -109,23 +108,15 @@ namespace FinanceScraper3.Services
                 case "notes_desc":
                     stock = stock.OrderByDescending(s => s.Notes);
                     break;
-
-                    
-
                 default:
                     stock = stock.OrderBy(s => s.StockSymbol);
                     break;
             }
 
-
-
-    
             return await stock
-            .Where(x=> x.Portfolio.Id == snapId)
-            .AsNoTracking()
-            .ToArrayAsync();
-
-
+                        .Where(x=> x.Portfolio.Id == snapId)
+                        .AsNoTracking()
+                        .ToArrayAsync();
         }
     }
 }

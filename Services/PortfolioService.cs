@@ -80,17 +80,10 @@ namespace FinanceScraper3.Services
             return await snapshot
                         .Where(x=> x.UserId == user.Id)
                         .AsNoTracking().ToArrayAsync();
-
-            // return await _context.Portfolios
-            // .Where(x=> x.UserId == user.Id)
-            // .ToArrayAsync();
         }
 
         public async Task<bool> TriggerSnapshotAsync(Portfolio newSnapshot, ApplicationUser user)
-        {
-            
-            // var snapshot = new Portfolio();            
-
+        {           
             ChromeOptions option = new ChromeOptions();
             option.AddArgument("--headless");
 
@@ -102,7 +95,6 @@ namespace FinanceScraper3.Services
             // navigating to username input box and clicking to sign in
             var userNameField = driver.FindElement(By.XPath("//*[@id='login-username']"));
             var loginUserButton = driver.FindElement(By.XPath("//*[@id='login-signin']"));            
-            // userNameField.SendKeys(user.UserName);
             userNameField.SendKeys("testscraper");      
             loginUserButton.Click();
 
@@ -113,19 +105,11 @@ namespace FinanceScraper3.Services
             var userPasswordField = driver.FindElement(By.XPath("//*[@id='login-passwd']"));
             var loginPasswordButton = driver.FindElement(By.XPath("//*[@id='login-signin']")); 
             userPasswordField.SendKeys("Password1!");
-            // userPasswordField.SendKeys(user.UserName);
             loginPasswordButton.Click();
 
-            // var portfolioButton = driver.FindElement(By.XPath("//*[@id='Nav-0-DesktopNav']/div/div[3]/div/div[1]/ul/li[2]"));
-            // portfolioButton.Click();
-
             driver.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_0/view/v2");
-
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);  
-
             var popups = driver.FindElements(By.XPath("//*[@id='fin-tradeit']/div[2]/div/div/div[2]/button[2]"));
-
-            // var popupButton = driver.FindElement(By.XPath("//*[@id='fin-tradeit']/div[2]/div/div/div[2]/button[2]"));
 
             if (popups.Count > 0)
             {
@@ -137,11 +121,6 @@ namespace FinanceScraper3.Services
                 System.Console.WriteLine("Popup not found");
             }
 
-            // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);  
-            // var myScraperButton = driver.FindElement(By.XPath("//*[@id='main']/section/section/div[2]/table/tbody/tr[2]/td[1]/a"));
-            // myScraperButton.Click();
-            
-
             var totalValue = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[1]")).Text;
             
             var dayGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[2]/span")).Text.Split(" ");
@@ -149,26 +128,16 @@ namespace FinanceScraper3.Services
             var totalGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[3]/span")).Text.Split(" ");
 
             newSnapshot.Date = DateTime.Now;
-            
             newSnapshot.TotalValue = Double.Parse(totalValue, NumberStyles.Currency);
-
             newSnapshot.TotalGain = Double.Parse(totalGain[0]);     
-            
             newSnapshot.TotalGainPercent = Double.Parse(totalGain[1].TrimStart(new char[] {'(', ' ' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;
-        
             newSnapshot.DayGain = Double.Parse(dayGain[0]);
-            
             newSnapshot.DayGainPercent = Double.Parse(dayGain[1].TrimStart(new char[] {'(', ' ' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;            
 
-
             var portfolioStockList = new List<Stock>();
-   
             var stockListTable = driver.FindElement(By.XPath("//*[@id='main']/section/section[2]/div[2]/table"));
-
             var stockListTableRows = stockListTable.FindElements(By.TagName("tr"));
-
             var stockInfo = new List<string>();
-            var counter = 0;
 
             foreach (var row in stockListTableRows)
             {
@@ -176,54 +145,44 @@ namespace FinanceScraper3.Services
                 if (stockListTableCells.Count > 0)
                 {
 
-                foreach (var cell in stockListTableCells)
-                {
-                    stockInfo.Add(cell.Text);
-                    System.Console.WriteLine("{0} is {1} and {2}", counter, cell.Text, cell.Text.GetType());
-                    counter++;
-                }
+                    foreach (var cell in stockListTableCells)
+                    {
+                        stockInfo.Add(cell.Text);
+                    }
 
-                var stockSymbolAndPrice = stockInfo[0].ToString().Split("\n");
-                var changeByDollarAndPercent = stockInfo[1].ToString().Split("\n");
-                var dayGainByDollarAndPercent = stockInfo[5].ToString().Split("\n");
-                var totalGainByDollarAndPercent = stockInfo[6].ToString().Split("\n");
-                var lotSplit = stockInfo[7].Split(" ");
-        
-
-            portfolioStockList.Add(new Stock()
-            {
-                StockSymbol = stockSymbolAndPrice[0].ToString(),          
-                CurrentPrice = Double.Parse(stockSymbolAndPrice[1]),
-                ChangeByDollar = Double.Parse(changeByDollarAndPercent[1]),
-                ChangeByPercent = (Double.Parse(changeByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
-                Shares = Double.Parse(stockInfo[2]),  
-                CostBasis = Double.Parse(stockInfo[3]),
-                MarketValue = Double.Parse(stockInfo[4]),
-                DayGainByDollar = Double.Parse(dayGainByDollarAndPercent[1]),
-                DayGainByPercent = (Double.Parse(dayGainByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
-                TotalGainByDollar = Double.Parse(totalGainByDollarAndPercent[1]),
-                TotalGainByPercent = (Double.Parse(totalGainByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
-                Lots = Double.Parse(lotSplit[0]),
-                Notes = stockInfo[8],
-            });
+                    var stockSymbolAndPrice = stockInfo[0].ToString().Split("\n");
+                    var changeByDollarAndPercent = stockInfo[1].ToString().Split("\n");
+                    var dayGainByDollarAndPercent = stockInfo[5].ToString().Split("\n");
+                    var totalGainByDollarAndPercent = stockInfo[6].ToString().Split("\n");
+                    var lotSplit = stockInfo[7].Split(" ");
             
-            }
+                    portfolioStockList.Add(new Stock()
+                    {
+                        StockSymbol = stockSymbolAndPrice[0].ToString(),          
+                        CurrentPrice = Double.Parse(stockSymbolAndPrice[1]),
+                        ChangeByDollar = Double.Parse(changeByDollarAndPercent[1]),
+                        ChangeByPercent = (Double.Parse(changeByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
+                        Shares = Double.Parse(stockInfo[2]),  
+                        CostBasis = Double.Parse(stockInfo[3]),
+                        MarketValue = Double.Parse(stockInfo[4]),
+                        DayGainByDollar = Double.Parse(dayGainByDollarAndPercent[1]),
+                        DayGainByPercent = (Double.Parse(dayGainByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
+                        TotalGainByDollar = Double.Parse(totalGainByDollarAndPercent[1]),
+                        TotalGainByPercent = (Double.Parse(totalGainByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
+                        Lots = Double.Parse(lotSplit[0]),
+                        Notes = stockInfo[8],
+                    });
+            
+                }
                 stockInfo.Clear();
             }
 
             newSnapshot.Stocks = portfolioStockList;
-
             newSnapshot.UserId = user.Id;
 
-
-
-            // ctx.Portfolios.Add(snapshot);
             _context.Portfolios.Add(newSnapshot);
 
-            
             var saveResult = await _context.SaveChangesAsync();
-
-                    
 
             if (saveResult > 0)
             {
@@ -234,10 +193,6 @@ namespace FinanceScraper3.Services
                 return false;
             }
             // if operation was successful, we will return true, because saveResult should == how many objects were saved to DB. If it is less than 0, we know it failed and return false
-
-            // return snapshot;
         }
-
-
     }
 }
