@@ -88,14 +88,16 @@ namespace FinanceScraper3.Services
             option.AddArgument("--headless");
 
             // create new driver class
-            var driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0", option);            
+            var driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0", option);
+
+            var loginCredentials = new LoginCredentials();            
 
             driver.Navigate().GoToUrl("https://login.yahoo.com/config/login?.intl=us&.lang=en-US&.src=finance&.done=https%3A%2F%2Ffinance.yahoo.com%2F");
 
             // navigating to username input box and clicking to sign in
             var userNameField = driver.FindElement(By.XPath("//*[@id='login-username']"));
             var loginUserButton = driver.FindElement(By.XPath("//*[@id='login-signin']"));            
-            userNameField.SendKeys("testscraper");      
+            userNameField.SendKeys(loginCredentials.Username); 
             loginUserButton.Click();
 
             // waiting 5 seconds for page to load then to go onto enter password. need to throw an exception here
@@ -104,7 +106,7 @@ namespace FinanceScraper3.Services
             // sending password to input box and signing in 
             var userPasswordField = driver.FindElement(By.XPath("//*[@id='login-passwd']"));
             var loginPasswordButton = driver.FindElement(By.XPath("//*[@id='login-signin']")); 
-            userPasswordField.SendKeys("Password1!");
+            userPasswordField.SendKeys(loginCredentials.Password);
             loginPasswordButton.Click();
 
             driver.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_0/view/v2");
@@ -113,7 +115,6 @@ namespace FinanceScraper3.Services
 
             if (popups.Count > 0)
             {
-                System.Console.WriteLine("popup is {0}", popups[0]);
                 popups[0].Click();
             }
             else
