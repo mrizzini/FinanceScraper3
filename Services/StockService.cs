@@ -17,7 +17,7 @@ namespace FinanceScraper3.Services
             _context = context;
         }
 
-        public async Task<Stock[]> GetStocksAsync(int id, string sortOrder, string searchString)
+        public async Task<List<Stock>> GetStocksAsync(int id, string sortOrder, string searchString)
         {
             var snapId = id;
 
@@ -116,8 +116,7 @@ namespace FinanceScraper3.Services
             return await stock
                         .Where(x=> x.Portfolio.Id == snapId)
                         .AsNoTracking()
-                        .ToArrayAsync();
+                        .ToListAsync();
         }
     }
 }
-

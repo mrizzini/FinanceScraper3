@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace FinanceScraper3.Services
 {
     public interface IPortfolioService
     {
-        Task<Portfolio[]> GetPortfolioSnapshotsAsync(ApplicationUser user, string sortOrder);
+        Task<List<Portfolio>> GetPortfolioSnapshotsAsync(ApplicationUser user, string sortOrder);
 
         Task<bool> TriggerSnapshotAsync(Portfolio newSnapshot, ApplicationUser user);
     }

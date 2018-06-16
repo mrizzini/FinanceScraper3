@@ -28,7 +28,7 @@ namespace FinanceScraper3.Services
             _context = context;
         }
 
-        public async Task<Portfolio[]> GetPortfolioSnapshotsAsync(ApplicationUser user, string sortOrder)
+        public async Task<List<Portfolio>> GetPortfolioSnapshotsAsync(ApplicationUser user, string sortOrder)
         {
 
             IQueryable<Portfolio> snapshot = from s in _context.Portfolios
@@ -79,7 +79,7 @@ namespace FinanceScraper3.Services
 
             return await snapshot
                         .Where(x=> x.UserId == user.Id)
-                        .AsNoTracking().ToArrayAsync();
+                        .AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> TriggerSnapshotAsync(Portfolio newSnapshot, ApplicationUser user)
