@@ -86,7 +86,7 @@ namespace FinanceScraper3.Services
         {           
             ChromeOptions option = new ChromeOptions();
             option.AddArgument("--headless");
-            option.AddArgument("no-sandbox");
+            option.AddArgument("--no-sandbox");
 
             // create new driver class
             var driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0", option);
