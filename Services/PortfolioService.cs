@@ -16,6 +16,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using FinanceScraper3.Controllers;
 using System.Globalization;
+using System.Threading;
 
 namespace FinanceScraper3.Services
 {
@@ -115,19 +116,30 @@ namespace FinanceScraper3.Services
 
             driver.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_0/view/v2");
             
-            IWebElement popup = wait.Until<IWebElement>((d) =>
+            try
             {
-                return d.FindElement(By.XPath("//*[@id='fin-tradeit']/div[2]/div/div/div[2]/button[2]"));
-            });
+                IWebElement popup = wait.Until<IWebElement>((d) =>
+                {
+                    return d.FindElement(By.XPath("//*[@id='fin-tradeit']/div[2]/div/div/div[2]/button[2]"));
+                });
 
-            driver.FindElement(By.XPath("//*[@id='fin-tradeit']/div[2]/div/div/div[2]/button[2]")).Click();
-            System.Console.WriteLine("Popup clicked");
+                driver.FindElement(By.XPath("//*[@id='fin-tradeit']/div[2]/div/div/div[2]/button[2]")).Click();
+                System.Console.WriteLine("Popup clicked");
+            }
+            catch(WebDriverException e)
+            {
+                System.Console.WriteLine("Popup not found {0}", e);
+            }
 
-            var totalValue = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[1]")).Text;
-            
-            var dayGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[2]/span")).Text.Split(" ");
+            System.Console.WriteLine("Start sleep to make sure all react elements are loaded");
+            Thread.Sleep(10000);
+            System.Console.WriteLine("End sleep");
 
-            var totalGain = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[3]/span")).Text.Split(" ");
+            var totalValue = driver.FindElement(By.ClassName("_3wreg")).Text;
+
+            var dayGain = driver.FindElement(By.ClassName("_2ETlv")).FindElement(By.TagName("span")).Text.Split(" ");
+
+            var totalGain = driver.FindElement(By.ClassName("_2HvXW")).FindElement(By.TagName("span")).Text.Split(" ");
 
             newSnapshot.Date = DateTime.Now;
             newSnapshot.TotalValue = Double.Parse(totalValue, NumberStyles.Currency);
@@ -137,18 +149,20 @@ namespace FinanceScraper3.Services
             newSnapshot.DayGainPercent = Double.Parse(dayGain[1].TrimStart(new char[] {'(', ' ' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;            
 
             var portfolioStockList = new List<Stock>();
+            
+            IWebElement tableWait = wait.Until<IWebElement>((d) =>
+            {
+                return d.FindElement(By.ClassName("tJDbU"));
+            });
+
             var stockListTable = driver.FindElement(By.ClassName("tJDbU"));
             
             var stockListTableRows = stockListTable.FindElements(By.ClassName("_14MJo"));
+            System.Console.WriteLine("stockListTableRows is {0}", stockListTableRows.Count());
             var stockInfo = new List<string>();
 
             foreach (var row in stockListTableRows)
             {
-
-                IWebElement tdWait = wait.Until<IWebElement>((d) =>
-                {
-                    return d.FindElement(By.TagName("td"));
-                });
 
                 var stockListTableCells = row.FindElements(By.TagName("td"));
                 if (stockListTableCells.Count > 0)
