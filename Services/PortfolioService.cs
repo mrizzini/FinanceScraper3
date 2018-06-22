@@ -96,7 +96,6 @@ namespace FinanceScraper3.Services
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             
-
             // navigating to username input box and clicking to sign in
             var userNameField = driver.FindElement(By.XPath("//*[@id='login-username']"));
             var loginUserButton = driver.FindElement(By.XPath("//*[@id='login-signin']"));            
@@ -131,8 +130,9 @@ namespace FinanceScraper3.Services
                 System.Console.WriteLine("Popup not found {0}", e);
             }
 
-            System.Console.WriteLine("Start sleep to make sure all react elements are loaded");
-            Thread.Sleep(10000);
+            // Thread.Sleep to work around selenium getting hung up on certain elements
+            System.Console.WriteLine("Start sleep");
+            Thread.Sleep(5000);
             System.Console.WriteLine("End sleep");
 
             var totalValue = driver.FindElement(By.ClassName("_3wreg")).Text;
