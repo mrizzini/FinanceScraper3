@@ -3179,10 +3179,10 @@
           }
         }
       },
-      "Selenium.Support/3.12.0": {
+      "Selenium.Support/3.12.1": {
         "type": "package",
         "dependencies": {
-          "Selenium.WebDriver": "3.12.0"
+          "Selenium.WebDriver": "3.12.1"
         },
         "compile": {
           "lib/netstandard2.0/WebDriver.Support.dll": {}
@@ -3191,7 +3191,7 @@
           "lib/netstandard2.0/WebDriver.Support.dll": {}
         }
       },
-      "Selenium.WebDriver/3.12.0": {
+      "Selenium.WebDriver/3.12.1": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "10.0.3"
@@ -3203,7 +3203,7 @@
           "lib/netstandard2.0/WebDriver.dll": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/2.38.0.1": {
+      "Selenium.WebDriver.ChromeDriver/2.40.0": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -8635,10 +8635,10 @@
         "version.txt"
       ]
     },
-    "Selenium.Support/3.12.0": {
-      "sha512": "AQc/09a4WeM1wGQGNBGcYaUGYyOVKj8Q5ca8EL0NiQWQcm4Hty5tGLSFDGhyUGrt7osfSl8TP0PMp+TC7z9TgA==",
+    "Selenium.Support/3.12.1": {
+      "sha512": "vConmmoCZqXS/c5MThury8BdHD5mK5blomyt4rstJBYs0HJeMcT+W02AnLIzHf0wOCFxtNgYtre1BR4NUrVvDA==",
       "type": "package",
-      "path": "selenium.support/3.12.0",
+      "path": "selenium.support/3.12.1",
       "files": [
         "lib/net35/WebDriver.Support.dll",
         "lib/net35/WebDriver.Support.xml",
@@ -8648,14 +8648,14 @@
         "lib/net45/WebDriver.Support.xml",
         "lib/netstandard2.0/WebDriver.Support.dll",
         "lib/netstandard2.0/WebDriver.Support.xml",
-        "selenium.support.3.12.0.nupkg.sha512",
+        "selenium.support.3.12.1.nupkg.sha512",
         "selenium.support.nuspec"
       ]
     },
-    "Selenium.WebDriver/3.12.0": {
-      "sha512": "c/ZC/krofDyGxMnVvcBRpuatIL7R/8Tz2D9aC9MON3XBxaYCnieDlDCkKobvrlujIJwAzIbFjrHz3kAUaGAdxg==",
+    "Selenium.WebDriver/3.12.1": {
+      "sha512": "hls+cz3SXBXi84qHy8SLxVCcMrqK+ROMYpdpancKQs50neHa6oNXKXSHyiOxHsOFX1d7ma56mkZhPRPf4jF3GA==",
       "type": "package",
-      "path": "selenium.webdriver/3.12.0",
+      "path": "selenium.webdriver/3.12.1",
       "files": [
         "lib/net35/WebDriver.dll",
         "lib/net35/WebDriver.xml",
@@ -8665,20 +8665,20 @@
         "lib/net45/WebDriver.xml",
         "lib/netstandard2.0/WebDriver.dll",
         "lib/netstandard2.0/WebDriver.xml",
-        "selenium.webdriver.3.12.0.nupkg.sha512",
+        "selenium.webdriver.3.12.1.nupkg.sha512",
         "selenium.webdriver.nuspec"
       ]
     },
-    "Selenium.WebDriver.ChromeDriver/2.38.0.1": {
-      "sha512": "BVxsFdDNE6o+xMIUQsYVOgttfdpLAD4KHnL78CzdeKr8TVll4TxptJSsndIcYDvUsElzyj1HjCRlGHXXM5eQUA==",
+    "Selenium.WebDriver.ChromeDriver/2.40.0": {
+      "sha512": "pWXnd17IY7fhXIYzsMfu1XSHC1ZrqrTsZ6kCPDz21cVlGgDUP+gSMTYk+vKOn3193DIsd9nj+7baXHvsYH0jdw==",
       "type": "package",
-      "path": "selenium.webdriver.chromedriver/2.38.0.1",
+      "path": "selenium.webdriver.chromedriver/2.40.0",
       "files": [
         "build/Selenium.WebDriver.ChromeDriver.targets",
         "driver/linux64/chromedriver",
         "driver/mac64/chromedriver",
         "driver/win32/chromedriver.exe",
-        "selenium.webdriver.chromedriver.2.38.0.1.nupkg.sha512",
+        "selenium.webdriver.chromedriver.2.40.0.nupkg.sha512",
         "selenium.webdriver.chromedriver.nuspec"
       ]
     },
@@ -13568,9 +13568,9 @@
       "Microsoft.EntityFrameworkCore.Tools.DotNet >= 2.1.0-preview1-final",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.4",
-      "Selenium.Support >= 3.12.0",
-      "Selenium.WebDriver >= 3.12.0",
-      "Selenium.WebDriver.ChromeDriver >= 2.38.0.1"
+      "Selenium.Support >= 3.12.1",
+      "Selenium.WebDriver >= 3.12.1",
+      "Selenium.WebDriver.ChromeDriver >= 2.40.0"
     ]
   },
   "packageFolders": {
@@ -13652,15 +13652,15 @@
           },
           "Selenium.Support": {
             "target": "Package",
-            "version": "[3.12.0, )"
+            "version": "[3.12.1, )"
           },
           "Selenium.WebDriver": {
             "target": "Package",
-            "version": "[3.12.0, )"
+            "version": "[3.12.1, )"
           },
           "Selenium.WebDriver.ChromeDriver": {
             "target": "Package",
-            "version": "[2.38.0.1, )"
+            "version": "[2.40.0, )"
           }
         },
         "imports": [

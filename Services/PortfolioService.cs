@@ -86,41 +86,42 @@ namespace FinanceScraper3.Services
         {           
             ChromeOptions option = new ChromeOptions();
             option.AddArgument("--headless");
+            option.AddArgument("no-sandbox");
 
             // create new driver class
             var driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0", option);
 
-            var loginCredentials = new LoginCredentials();            
+            driver.Navigate().GoToUrl("https://login.yahoo.com/?.src=finance&.intl=us&.done=https%3A%2F%2Ffinance.yahoo.com%2Fportfolios&add=1");
 
-            driver.Navigate().GoToUrl("https://login.yahoo.com/config/login?.intl=us&.lang=en-US&.src=finance&.done=https%3A%2F%2Ffinance.yahoo.com%2F");
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            
 
             // navigating to username input box and clicking to sign in
             var userNameField = driver.FindElement(By.XPath("//*[@id='login-username']"));
             var loginUserButton = driver.FindElement(By.XPath("//*[@id='login-signin']"));            
-            userNameField.SendKeys(loginCredentials.Username); 
+            userNameField.SendKeys("testscraper"); 
             loginUserButton.Click();
 
-            // waiting 5 seconds for page to load then to go onto enter password. need to throw an exception here
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5); 
+            IWebElement passwordWait = wait.Until<IWebElement>((d) =>
+            {
+                return d.FindElement(By.XPath("//*[@id='login-passwd']"));
+            }); 
 
             // sending password to input box and signing in 
             var userPasswordField = driver.FindElement(By.XPath("//*[@id='login-passwd']"));
             var loginPasswordButton = driver.FindElement(By.XPath("//*[@id='login-signin']")); 
-            userPasswordField.SendKeys(loginCredentials.Password);
+            userPasswordField.SendKeys("Password1!");
             loginPasswordButton.Click();
 
             driver.Navigate().GoToUrl("https://finance.yahoo.com/portfolio/p_0/view/v2");
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);  
-            var popups = driver.FindElements(By.XPath("//*[@id='fin-tradeit']/div[2]/div/div/div[2]/button[2]"));
+            
+            IWebElement popup = wait.Until<IWebElement>((d) =>
+            {
+                return d.FindElement(By.XPath("//*[@id='fin-tradeit']/div[2]/div/div/div[2]/button[2]"));
+            });
 
-            if (popups.Count > 0)
-            {
-                popups[0].Click();
-            }
-            else
-            {
-                System.Console.WriteLine("Popup not found");
-            }
+            driver.FindElement(By.XPath("//*[@id='fin-tradeit']/div[2]/div/div/div[2]/button[2]")).Click();
+            System.Console.WriteLine("Popup clicked");
 
             var totalValue = driver.FindElement(By.XPath("//*[@id='main']/section/header/div/div[1]/div/div[2]/p[1]")).Text;
             
@@ -136,12 +137,19 @@ namespace FinanceScraper3.Services
             newSnapshot.DayGainPercent = Double.Parse(dayGain[1].TrimStart(new char[] {'(', ' ' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;            
 
             var portfolioStockList = new List<Stock>();
-            var stockListTable = driver.FindElement(By.XPath("//*[@id='main']/section/section[2]/div[2]/table"));
-            var stockListTableRows = stockListTable.FindElements(By.TagName("tr"));
+            var stockListTable = driver.FindElement(By.ClassName("tJDbU"));
+            
+            var stockListTableRows = stockListTable.FindElements(By.ClassName("_14MJo"));
             var stockInfo = new List<string>();
 
             foreach (var row in stockListTableRows)
             {
+
+                IWebElement tdWait = wait.Until<IWebElement>((d) =>
+                {
+                    return d.FindElement(By.TagName("td"));
+                });
+
                 var stockListTableCells = row.FindElements(By.TagName("td"));
                 if (stockListTableCells.Count > 0)
                 {
@@ -175,9 +183,12 @@ namespace FinanceScraper3.Services
                     });
             
                 }
+                System.Console.WriteLine("Stock done");
                 stockInfo.Clear();
             }
 
+            System.Console.WriteLine("Driver quitting");
+            driver.Quit();
             newSnapshot.Stocks = portfolioStockList;
             newSnapshot.UserId = user.Id;
 

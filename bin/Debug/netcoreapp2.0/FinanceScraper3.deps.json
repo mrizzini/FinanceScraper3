@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "4b879202b8f8ba4712de103af1fc654136f8c811"
+    "signature": "570f28bdbcaa32925f4a1fc2d98fd922f1dd4866"
   },
   "compilationOptions": {
     "defines": [
@@ -32,9 +32,9 @@
           "Microsoft.EntityFrameworkCore.Tools.DotNet": "2.1.0-preview1-final",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.4",
-          "Selenium.Support": "3.12.0",
-          "Selenium.WebDriver": "3.12.0",
-          "Selenium.WebDriver.ChromeDriver": "2.38.0.1"
+          "Selenium.Support": "3.12.1",
+          "Selenium.WebDriver": "3.12.1",
+          "Selenium.WebDriver.ChromeDriver": "2.40.0"
         },
         "runtime": {
           "FinanceScraper3.dll": {}
@@ -45,7 +45,7 @@
       },
       "DotNetSeleniumExtras.WaitHelpers/3.11.0": {
         "dependencies": {
-          "Selenium.WebDriver": "3.12.0"
+          "Selenium.WebDriver": "3.12.1"
         },
         "runtime": {
           "lib/netstandard2.0/SeleniumExtras.WaitHelpers.dll": {}
@@ -2734,9 +2734,9 @@
           }
         }
       },
-      "Selenium.Support/3.12.0": {
+      "Selenium.Support/3.12.1": {
         "dependencies": {
-          "Selenium.WebDriver": "3.12.0"
+          "Selenium.WebDriver": "3.12.1"
         },
         "runtime": {
           "lib/netstandard2.0/WebDriver.Support.dll": {}
@@ -2745,7 +2745,7 @@
           "lib/netstandard2.0/WebDriver.Support.dll": {}
         }
       },
-      "Selenium.WebDriver/3.12.0": {
+      "Selenium.WebDriver/3.12.1": {
         "dependencies": {
           "Newtonsoft.Json": "10.0.3"
         },
@@ -2756,7 +2756,7 @@
           "lib/netstandard2.0/WebDriver.dll": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/2.38.0.1": {},
+      "Selenium.WebDriver.ChromeDriver/2.40.0": {},
       "SQLitePCLRaw.bundle_green/1.1.10": {
         "dependencies": {
           "SQLitePCLRaw.core": "1.1.10",
@@ -5773,26 +5773,26 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
-    "Selenium.Support/3.12.0": {
+    "Selenium.Support/3.12.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-AQc/09a4WeM1wGQGNBGcYaUGYyOVKj8Q5ca8EL0NiQWQcm4Hty5tGLSFDGhyUGrt7osfSl8TP0PMp+TC7z9TgA==",
-      "path": "selenium.support/3.12.0",
-      "hashPath": "selenium.support.3.12.0.nupkg.sha512"
+      "sha512": "sha512-vConmmoCZqXS/c5MThury8BdHD5mK5blomyt4rstJBYs0HJeMcT+W02AnLIzHf0wOCFxtNgYtre1BR4NUrVvDA==",
+      "path": "selenium.support/3.12.1",
+      "hashPath": "selenium.support.3.12.1.nupkg.sha512"
     },
-    "Selenium.WebDriver/3.12.0": {
+    "Selenium.WebDriver/3.12.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-c/ZC/krofDyGxMnVvcBRpuatIL7R/8Tz2D9aC9MON3XBxaYCnieDlDCkKobvrlujIJwAzIbFjrHz3kAUaGAdxg==",
-      "path": "selenium.webdriver/3.12.0",
-      "hashPath": "selenium.webdriver.3.12.0.nupkg.sha512"
+      "sha512": "sha512-hls+cz3SXBXi84qHy8SLxVCcMrqK+ROMYpdpancKQs50neHa6oNXKXSHyiOxHsOFX1d7ma56mkZhPRPf4jF3GA==",
+      "path": "selenium.webdriver/3.12.1",
+      "hashPath": "selenium.webdriver.3.12.1.nupkg.sha512"
     },
-    "Selenium.WebDriver.ChromeDriver/2.38.0.1": {
+    "Selenium.WebDriver.ChromeDriver/2.40.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-BVxsFdDNE6o+xMIUQsYVOgttfdpLAD4KHnL78CzdeKr8TVll4TxptJSsndIcYDvUsElzyj1HjCRlGHXXM5eQUA==",
-      "path": "selenium.webdriver.chromedriver/2.38.0.1",
-      "hashPath": "selenium.webdriver.chromedriver.2.38.0.1.nupkg.sha512"
+      "sha512": "sha512-pWXnd17IY7fhXIYzsMfu1XSHC1ZrqrTsZ6kCPDz21cVlGgDUP+gSMTYk+vKOn3193DIsd9nj+7baXHvsYH0jdw==",
+      "path": "selenium.webdriver.chromedriver/2.40.0",
+      "hashPath": "selenium.webdriver.chromedriver.2.40.0.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_green/1.1.10": {
       "type": "package",
