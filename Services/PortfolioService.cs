@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using FinanceScraper3.Controllers;
@@ -85,12 +86,15 @@ namespace FinanceScraper3.Services
 
         public async Task<bool> TriggerSnapshotAsync(Portfolio newSnapshot, ApplicationUser user)
         {           
-            ChromeOptions option = new ChromeOptions();
-            option.AddArgument("--headless");
-            option.AddArgument("--no-sandbox");
 
             // create new driver class
-            var driver = new ChromeDriver("/Users/matthewrizzini/Desktop/Visual Studio Projects/FinanceScraper3/bin/Debug/netcoreapp2.0", option);
+            FirefoxOptions options = new FirefoxOptions();
+            options.AddArguments("--headless");
+
+            //Give the path of the geckodriver.exe    
+            FirefoxDriverService service = FirefoxDriverService.CreateDefaultService("bin/Debug/netcoreapp2.0/");
+
+            IWebDriver driver = new FirefoxDriver(service, options);
 
             driver.Navigate().GoToUrl("https://login.yahoo.com/?.src=finance&.intl=us&.done=https%3A%2F%2Ffinance.yahoo.com%2Fportfolios&add=1");
 
@@ -130,11 +134,6 @@ namespace FinanceScraper3.Services
                 System.Console.WriteLine("Popup not found {0}", e);
             }
 
-            // Thread.Sleep to work around selenium getting hung up on certain elements
-            System.Console.WriteLine("Start sleep");
-            Thread.Sleep(5000);
-            System.Console.WriteLine("End sleep");
-
             var totalValue = driver.FindElement(By.ClassName("_3wreg")).Text;
 
             var dayGain = driver.FindElement(By.ClassName("_2ETlv")).FindElement(By.TagName("span")).Text.Split(" ");
@@ -158,7 +157,6 @@ namespace FinanceScraper3.Services
             var stockListTable = driver.FindElement(By.ClassName("tJDbU"));
             
             var stockListTableRows = stockListTable.FindElements(By.ClassName("_14MJo"));
-            System.Console.WriteLine("stockListTableRows is {0}", stockListTableRows.Count());
             var stockInfo = new List<string>();
 
             foreach (var row in stockListTableRows)

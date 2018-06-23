@@ -18,6 +18,7 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.40.0"/>
     <PackageReference Include="Selenium.Support" Version="3.12.1"/>
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0"/>
+    <PackageReference Include="Selenium.Firefox.WebDriver" Version="0.21.0"/>
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3"/>

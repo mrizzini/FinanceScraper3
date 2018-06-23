@@ -3179,6 +3179,12 @@
           }
         }
       },
+      "Selenium.Firefox.WebDriver/0.21.0": {
+        "type": "package",
+        "build": {
+          "build/Selenium.Firefox.WebDriver.targets": {}
+        }
+      },
       "Selenium.Support/3.12.1": {
         "type": "package",
         "dependencies": {
@@ -8635,6 +8641,17 @@
         "version.txt"
       ]
     },
+    "Selenium.Firefox.WebDriver/0.21.0": {
+      "sha512": "BktTpRQBLpAaNM51jJDOKn9AhK/fMSQJwR3mm5UOjJN9XPPZQK/AzojQat4/L9+L1c4aiWMchtljzUwL4WGK1Q==",
+      "type": "package",
+      "path": "selenium.firefox.webdriver/0.21.0",
+      "files": [
+        "build/Selenium.Firefox.WebDriver.targets",
+        "driver/geckodriver.exe",
+        "selenium.firefox.webdriver.0.21.0.nupkg.sha512",
+        "selenium.firefox.webdriver.nuspec"
+      ]
+    },
     "Selenium.Support/3.12.1": {
       "sha512": "vConmmoCZqXS/c5MThury8BdHD5mK5blomyt4rstJBYs0HJeMcT+W02AnLIzHf0wOCFxtNgYtre1BR4NUrVvDA==",
       "type": "package",
@@ -13568,6 +13585,7 @@
       "Microsoft.EntityFrameworkCore.Tools.DotNet >= 2.1.0-preview1-final",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.4",
+      "Selenium.Firefox.WebDriver >= 0.21.0",
       "Selenium.Support >= 3.12.1",
       "Selenium.WebDriver >= 3.12.1",
       "Selenium.WebDriver.ChromeDriver >= 2.40.0"
@@ -13649,6 +13667,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[2.0.4, )"
+          },
+          "Selenium.Firefox.WebDriver": {
+            "target": "Package",
+            "version": "[0.21.0, )"
           },
           "Selenium.Support": {
             "target": "Package",

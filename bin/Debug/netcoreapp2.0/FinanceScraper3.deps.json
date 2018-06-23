@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "570f28bdbcaa32925f4a1fc2d98fd922f1dd4866"
+    "signature": "79c0b95873f8b84cbc547c1dd0ae71afb6147055"
   },
   "compilationOptions": {
     "defines": [
@@ -32,6 +32,7 @@
           "Microsoft.EntityFrameworkCore.Tools.DotNet": "2.1.0-preview1-final",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.4",
+          "Selenium.Firefox.WebDriver": "0.21.0",
           "Selenium.Support": "3.12.1",
           "Selenium.WebDriver": "3.12.1",
           "Selenium.WebDriver.ChromeDriver": "2.40.0"
@@ -2734,6 +2735,7 @@
           }
         }
       },
+      "Selenium.Firefox.WebDriver/0.21.0": {},
       "Selenium.Support/3.12.1": {
         "dependencies": {
           "Selenium.WebDriver": "3.12.1"
@@ -5772,6 +5774,13 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "Selenium.Firefox.WebDriver/0.21.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BktTpRQBLpAaNM51jJDOKn9AhK/fMSQJwR3mm5UOjJN9XPPZQK/AzojQat4/L9+L1c4aiWMchtljzUwL4WGK1Q==",
+      "path": "selenium.firefox.webdriver/0.21.0",
+      "hashPath": "selenium.firefox.webdriver.0.21.0.nupkg.sha512"
     },
     "Selenium.Support/3.12.1": {
       "type": "package",
