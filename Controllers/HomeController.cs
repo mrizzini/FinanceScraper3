@@ -7,15 +7,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using FinanceScraper3.Models;
 using FinanceScraper3.Data;
-
+using FinanceScraper3.Services;
 
 namespace FinanceScraper3.Controllers
 {
     public class HomeController : Controller
-    {        
-        public IActionResult Index()
+    {
+
+        private readonly IStockMarketService _stockMarketService;
+
+        public HomeController(IStockMarketService stockMarketService)
         {
-            return View();
+            _stockMarketService = stockMarketService;
+        }     
+
+        public async Task<IActionResult> Index()
+        {
+            var stockMarketInfo = await _stockMarketService.GetStockMarket();
+
+            var model = new StockMarketViewModel()
+            {
+                StockMarketInfo = stockMarketInfo
+            };
+
+            return View(model);
         }
 
         public IActionResult About()

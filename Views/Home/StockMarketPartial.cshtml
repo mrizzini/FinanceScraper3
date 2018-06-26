@@ -1,0 +1,29 @@
+@model FinanceScraper3.Models.StockMarketViewModel
+
+
+<h3 class="text-center">The Stock Market at a glance:</h3>
+<h4 class="text-center">(as of @Model.StockMarketInfo.Date)</h4>
+
+<div class="row; autosized; text-center">
+    <div class="col-md-4">
+        <h2>S&P 500</h2>            
+            <h3><span class="label label-primary">@Html.DisplayFor(x => @Model.StockMarketInfo.SPCurrentPrice)</span></h3>
+            <p class="@(@Model.StockMarketInfo.SPPriceChange > 0 ? "label label-success" : "label label-danger")">@Html.DisplayFor( x => @Model.StockMarketInfo.SPPriceChange)</p>
+            <p class="@(@Model.StockMarketInfo.SPPercentChange> 0 ? "label label-success" : "label label-danger")">@Html.DisplayFor( x => @Model.StockMarketInfo.SPPercentChange)</p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>DOW 30</h2>
+            <h3><span class="label label-primary">@Html.DisplayFor(x => @Model.StockMarketInfo.DOWCurrentPrice)</span></h3>
+            <p class="@(@Model.StockMarketInfo.DOWPriceChange > 0 ? "label label-success" : "label label-danger")">@Html.DisplayFor( x => @Model.StockMarketInfo.DOWPriceChange)</p>
+            <p class="@(@Model.StockMarketInfo.DOWPercentChange > 0 ? "label label-success" : "label label-danger")">@Html.DisplayFor( x => @Model.StockMarketInfo.DOWPercentChange)</p>
+    </div>
+    
+    <div class="col-md-4">
+        <h2>NASDAQ</h2>
+            <h3><span class="label label-primary">@Html.DisplayFor(x => @Model.StockMarketInfo.NASDAQCurrentPrice)</span></h3>
+            <p class="@(@Model.StockMarketInfo.NASDAQPriceChange > 0 ? "label label-success" : "label label-danger")">@Html.DisplayFor( x => @Model.StockMarketInfo.NASDAQPriceChange)</p>
+            <p class="@(@Model.StockMarketInfo.NASDAQPercentChange > 0 ? "label label-success" : "label label-danger")">@Html.DisplayFor( x => @Model.StockMarketInfo.NASDAQPercentChange)</p>
+    </div>
+</div>
+

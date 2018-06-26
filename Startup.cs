@@ -43,6 +43,8 @@ namespace FinanceScraper3
 
             services.AddScoped<IStockService, StockService>();
 
+            services.AddScoped<IStockMarketService, StockMarketService>();
+
             services.AddMvc();
         }
 
