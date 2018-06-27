@@ -33,7 +33,6 @@ namespace FinanceScraper3.Controllers
         
         public async Task<IActionResult> Index(string sortOrder)
         {
-
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser == null) return Challenge();
 

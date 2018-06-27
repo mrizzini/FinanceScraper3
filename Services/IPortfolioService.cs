@@ -15,6 +15,6 @@ namespace FinanceScraper3.Services
     }
 }
 
-// This is an interface, there is no code, just the definition of the method that will return a Task<Portfolio[]>
+// This is an interface, there is no code, just the definition of the method that will return a Task List<Portfolio>
 // Task is used here b/c this method will be asynchronous, it may not be able to return the list of snapshots right away b/c it needs to talk to the database first
 // Now we must create the actual service class.

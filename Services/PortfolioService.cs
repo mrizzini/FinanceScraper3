@@ -100,7 +100,6 @@ namespace FinanceScraper3.Services
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             
-            // navigating to username input box and clicking to sign in
             var userNameField = driver.FindElement(By.XPath("//*[@id='login-username']"));
             var loginUserButton = driver.FindElement(By.XPath("//*[@id='login-signin']"));            
             userNameField.SendKeys("testscraper"); 
@@ -111,7 +110,6 @@ namespace FinanceScraper3.Services
                 return d.FindElement(By.XPath("//*[@id='login-passwd']"));
             }); 
 
-            // sending password to input box and signing in 
             var userPasswordField = driver.FindElement(By.XPath("//*[@id='login-passwd']"));
             var loginPasswordButton = driver.FindElement(By.XPath("//*[@id='login-signin']")); 
             userPasswordField.SendKeys("Password1!");
@@ -135,9 +133,7 @@ namespace FinanceScraper3.Services
             }
 
             var totalValue = driver.FindElement(By.ClassName("_3wreg")).Text;
-
             var dayGain = driver.FindElement(By.ClassName("_2ETlv")).FindElement(By.TagName("span")).Text.Split(" ");
-
             var totalGain = driver.FindElement(By.ClassName("_2HvXW")).FindElement(By.TagName("span")).Text.Split(" ");
 
             newSnapshot.Date = DateTime.Now;
@@ -145,7 +141,7 @@ namespace FinanceScraper3.Services
             newSnapshot.TotalGain = double.Parse(totalGain[0]);     
             newSnapshot.TotalGainPercent = double.Parse(totalGain[1].Trim( new char[] { '%', ' ', '(', ')' } ) ) / 100;
             newSnapshot.DayGain = double.Parse(dayGain[0]);
-            newSnapshot.DayGainPercent = double.Parse(dayGain[1].Trim( new char[] { '%', ' ','(', ')' } ) ) / 100;            
+            newSnapshot.DayGainPercent = double.Parse(dayGain[1].Trim( new char[] { '%', ' ','(', ')' } ) ) / 100;        
 
             var portfolioStockList = new List<Stock>();
             
@@ -155,17 +151,14 @@ namespace FinanceScraper3.Services
             });
 
             var stockListTable = driver.FindElement(By.ClassName("tJDbU"));
-            
             var stockListTableRows = stockListTable.FindElements(By.ClassName("_14MJo"));
             var stockInfo = new List<string>();
 
             foreach (var row in stockListTableRows)
             {
-
                 var stockListTableCells = row.FindElements(By.TagName("td"));
                 if (stockListTableCells.Count > 0)
                 {
-
                     foreach (var cell in stockListTableCells)
                     {
                         stockInfo.Add(cell.Text);
@@ -193,7 +186,6 @@ namespace FinanceScraper3.Services
                         Lots = double.Parse(lotSplit[0]),
                         Notes = stockInfo[8],
                     });
-            
                 }
                 System.Console.WriteLine("Stock done");
                 stockInfo.Clear();
@@ -203,7 +195,6 @@ namespace FinanceScraper3.Services
             driver.Quit();
             newSnapshot.Stocks = portfolioStockList;
             newSnapshot.UserId = user.Id;
-
             _context.Portfolios.Add(newSnapshot);
 
             var saveResult = await _context.SaveChangesAsync();

@@ -1,8 +1,8 @@
 @model Portfolio
 
-<form asp-action="TriggerSnapshot" method="POST">
+<form asp-controller="Snapshots" asp-action="TriggerSnapshot" method="POST">
     <label>If you'd like to trigger a new snapshot of your portfolio, please click the button below <br>(new snapshots may take up to 30 seconds)</label>
     <br>
-    <button class ="btn btn-success" type="submit">Trigger Snapshot</button>
+    <button class="btn btn-success" type="submit">Trigger Snapshot</button>
 </form>
 

@@ -3,9 +3,8 @@
 
 <form asp-action="Index" method="get">
         <div class="form-actions no-color">
-            <p>
-                Find by stock symbol: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-                <input type="submit" value="Search" class="btn btn-default" /> |
+            <p>Find by stock symbol: <input type="text" name="SearchString" value="@ViewData["currentFilter"]"/>
+                <input type="submit" value="Search" class="btn btn-default"/> |
                 <a asp-action="Index">Back to Full List</a>
             </p>
         </div>
@@ -17,7 +16,7 @@
             <th><a asp-action="Index" asp-route-sortOrder="@ViewData["StockSymbolSortParm"]">Symbol</a></th>
             <th><a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentPriceSortParm"]">Price</a></th>
             <th><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByDollarSortParm"]">Change By $</a></th>
-            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByPercentSortParm"]">Change By %</a></th>          
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["ChangeByPercentSortParm"]">Change By %</a></th>
             <th><a asp-action="Index" asp-route-sortOrder="@ViewData["SharesSortParm"]">Shares</a></th>
             <th><a asp-action="Index" asp-route-sortOrder="@ViewData["CostBasisSortParm"]">Cost Basis</a></th>
             <th><a asp-action="Index" asp-route-sortOrder="@ViewData["MarketValueSortParm"]">Market Value</a></th>
