@@ -141,11 +141,11 @@ namespace FinanceScraper3.Services
             var totalGain = driver.FindElement(By.ClassName("_2HvXW")).FindElement(By.TagName("span")).Text.Split(" ");
 
             newSnapshot.Date = DateTime.Now;
-            newSnapshot.TotalValue = Double.Parse(totalValue, NumberStyles.Currency);
-            newSnapshot.TotalGain = Double.Parse(totalGain[0]);     
-            newSnapshot.TotalGainPercent = Double.Parse(totalGain[1].TrimStart(new char[] {'(', ' ' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;
-            newSnapshot.DayGain = Double.Parse(dayGain[0]);
-            newSnapshot.DayGainPercent = Double.Parse(dayGain[1].TrimStart(new char[] {'(', ' ' }).TrimEnd( new char[] { '%', ' ', ')' } ) ) / 100;            
+            newSnapshot.TotalValue = double.Parse(totalValue, NumberStyles.Currency);
+            newSnapshot.TotalGain = double.Parse(totalGain[0]);     
+            newSnapshot.TotalGainPercent = double.Parse(totalGain[1].Trim( new char[] { '%', ' ', '(', ')' } ) ) / 100;
+            newSnapshot.DayGain = double.Parse(dayGain[0]);
+            newSnapshot.DayGainPercent = double.Parse(dayGain[1].Trim( new char[] { '%', ' ','(', ')' } ) ) / 100;            
 
             var portfolioStockList = new List<Stock>();
             
@@ -180,17 +180,17 @@ namespace FinanceScraper3.Services
                     portfolioStockList.Add(new Stock()
                     {
                         StockSymbol = stockSymbolAndPrice[0].ToString(),          
-                        CurrentPrice = Double.Parse(stockSymbolAndPrice[1]),
-                        ChangeByDollar = Double.Parse(changeByDollarAndPercent[1]),
-                        ChangeByPercent = (Double.Parse(changeByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
-                        Shares = Double.Parse(stockInfo[2]),  
-                        CostBasis = Double.Parse(stockInfo[3]),
-                        MarketValue = Double.Parse(stockInfo[4]),
-                        DayGainByDollar = Double.Parse(dayGainByDollarAndPercent[1]),
-                        DayGainByPercent = (Double.Parse(dayGainByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
-                        TotalGainByDollar = Double.Parse(totalGainByDollarAndPercent[1]),
-                        TotalGainByPercent = (Double.Parse(totalGainByDollarAndPercent[0].TrimEnd( new char[] {'%' } )) / 100),
-                        Lots = Double.Parse(lotSplit[0]),
+                        CurrentPrice = double.Parse(stockSymbolAndPrice[1]),
+                        ChangeByDollar = double.Parse(changeByDollarAndPercent[1]),
+                        ChangeByPercent = (double.Parse(changeByDollarAndPercent[0].Trim( new char[] {'%' } )) / 100),
+                        Shares = double.Parse(stockInfo[2]),  
+                        CostBasis = double.Parse(stockInfo[3]),
+                        MarketValue = double.Parse(stockInfo[4]),
+                        DayGainByDollar = double.Parse(dayGainByDollarAndPercent[1]),
+                        DayGainByPercent = (double.Parse(dayGainByDollarAndPercent[0].Trim( new char[] {'%' } )) / 100),
+                        TotalGainByDollar = double.Parse(totalGainByDollarAndPercent[1]),
+                        TotalGainByPercent = (double.Parse(totalGainByDollarAndPercent[0].Trim( new char[] {'%' } )) / 100),
+                        Lots = double.Parse(lotSplit[0]),
                         Notes = stockInfo[8],
                     });
             

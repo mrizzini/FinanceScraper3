@@ -32,23 +32,14 @@ namespace FinanceScraper3.Services
             var StockMarketInfo = new StockMarket
             {
                 Date = DateTime.Now,
-
                 SPCurrentPrice = double.Parse(spCurrentPrice.InnerHtml, NumberStyles.Currency),
-
                 SPPercentChange = double.Parse(spPercentChange.InnerHtml.Trim( new char[] { '%', ' ', '(', ')' } ) ) / 100,
-
                 SPPriceChange = double.Parse(spPriceChange.InnerHtml, NumberStyles.Currency),
-
                 DOWCurrentPrice = double.Parse(dowCurrentPrice.InnerHtml, NumberStyles.Currency),
-
                 DOWPercentChange = double.Parse(dowPercentChange.InnerHtml.Trim( new char[] { '%', ' ', '(', ')' } ) ) / 100,
-                
                 DOWPriceChange = double.Parse(dowPriceChange.InnerHtml),
-                
                 NASDAQCurrentPrice = double.Parse(nasdaqCurrentPrice.InnerHtml),
-                
                 NASDAQPercentChange = double.Parse(nasdaqPercentChange.InnerHtml.Trim( new char[] { '%', ' ', '(', ')' } ) ) / 100,
-                
                 NASDAQPriceChange = double.Parse(nasdaqPriceChange.InnerHtml)
             };
 
