@@ -10,8 +10,13 @@ This app also uses HTML Agility Pack to navigate to the Yahoo! Finance homepage 
 Other technologies/frameworks I used:
 
 -ASP.NET Core
+
 -ASP.NET Core Identity
+
 -Entity Framework
+
 -SQLite
+
 -Bootstrap
+
 -Razor Pages
